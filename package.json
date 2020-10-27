@@ -1,0 +1,25 @@
+{
+  "name": "svelte-mui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel --no-cache --public-url '/' --out-dir build src/index.html",
+    "build": "parcel build --no-cache --public-url '/' --out-dir build src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "coffeescript": "^2.5.1",
+    "materialize-css": "^1.0.0",
+    "parcel": "^1.12.4",
+    "parcel-plugin-svelte": "^4.0.6",
+    "sass": "^1.27.0",
+    "svelte": "^3.24.1",
+    "svelte-check": "^1.0.36",
+    "svelte-material-ui": "^1.0.0",
+    "svelte-preprocess": "^4.2.1"
+  }
+}

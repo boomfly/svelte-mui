@@ -9,8 +9,6 @@
       result += "--shadow: var(--theme-shadows-#{elevation});"
     result
   )
-
-  
 </script>
 
 <style>
@@ -34,7 +32,7 @@
 <div
   class:rounded={!square}
   class='root {variant} {$$props.class || ''}'
-  style='{style} {$$props.style || ''}'
+  style='{style}{$$props.style || ''}'
 >
   <slot />
 </div>

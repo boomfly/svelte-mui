@@ -1,6 +1,5 @@
 <script lang='coffee'>
   import {getContext} from 'svelte'
-  import Nested from './Nested.svelte'
   #import Button from './Button.svelte'
   import Badge from './Badge.svelte'
   import Paper from '/mui/Paper'
@@ -10,7 +9,6 @@
   #import ThemeDark from './ThemeDark'
   #import ThemeLight from './ThemeLight'
   import CssBaseline from '/mui/styles/CssBaseline'
-  import Theme from './Theme'
   #Paper = import('./Paper')
 
   import Element from '/mui/common/Element'

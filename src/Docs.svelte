@@ -1,8 +1,8 @@
 <script lang='coffee'>
   import {getContext} from 'svelte'
   import ThemeProvider from '/mui/styles/ThemeProvider'
-  import Theme from './Theme'
 
+  import Button from '/mui/Button'
   import Paper from '/mui/Paper'
   import Grid from '/mui/Grid'
   import AppBar from '/mui/AppBar'
@@ -33,7 +33,7 @@
 </style>
 
 <ThemeProvider {theme} />
-<Theme />
+
 <div class='root'>
   <AppBar class='p2' color='default' position='static'>
     <Typography variant='h5'>Messages</Typography>
@@ -41,7 +41,30 @@
   
   <br />
 
-  <button on:click={toggleTheme}>Toggle Theme</button>
+  <Paper class='p2' elevation={5}>
+    <Button on:click={toggleTheme} variant='contained' disabled={false}>Toggle Theme</Button>
+  </Paper>
+
+  <Paper class='p2'>
+    <Button variant='contained'>Default</Button>
+    <Button variant='contained' color='primary'>Primary</Button>
+    <Button variant='contained' color='secondary'>Secondary</Button>
+    <Button variant='contained' disabled>Disabled</Button>
+  </Paper>
+
+  <Paper class='p2 mt2'>
+    <Button variant='outlined'>Default</Button>
+    <Button variant='outlined' color='primary'>Primary</Button>
+    <Button variant='outlined' color='secondary'>Secondary</Button>
+    <Button variant='outlined' disabled>Disabled</Button>
+  </Paper>
+
+  <Paper class='p2 mt2'>
+    <Button variant='text'>Default</Button>
+    <Button variant='text' color='primary'>Primary</Button>
+    <Button variant='text' color='secondary'>Secondary</Button>
+    <Button variant='text' disabled>Disabled</Button>
+  </Paper>
 
   <br />
   <br />
@@ -52,12 +75,12 @@
   <div class='p1'>
     <Grid container spacing={spacing} justify='center'>
       <Grid item xs={3}>
-        <Paper variant='elevation' elevation={24} class='p2'>
+        <Paper variant='outlined' elevation={24} class='p2'>
           
         </Paper>
       </Grid>
       <Grid item xs={3}>
-        <Paper variant='elevation' class='p2'>
+        <Paper variant='outlined' class='p2'>
           
         </Paper>
       </Grid>

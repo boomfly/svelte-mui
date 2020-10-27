@@ -24,9 +24,9 @@
     --theme-spacing: 8px;
 
     /* palette */
-    --theme-palette-primary-light: var(--theme-colors-indigo-300);
-    --theme-palette-primary-main: var(--theme-colors-indigo-500);
-    --theme-palette-primary-dark: var(--theme-colors-indigo-700);
+    --theme-palette-primary-light: var(--theme-colors-blue-300);
+    --theme-palette-primary-main: var(--theme-colors-blue-500);
+    --theme-palette-primary-dark: var(--theme-colors-blue-700);
     --theme-palette-primary-contrast-text: var(--theme-colors-common-white);
 
     --theme-palette-secondary-light: var(--theme-colors-pink-300);
@@ -193,21 +193,21 @@
     /* action */
     --theme-palette-action-active: rgba(0, 0, 0, 0.54);
     --theme-palette-action-hover: rgba(0, 0, 0, 0.04);
-    --theme-palette-action-hover-opacity: 0.08;
-    --theme-palette-action-selected: rgba(255, 255, 255, 0.16);
-    --theme-palette-action-selected-opacity: 0.16;
-    --theme-palette-action-disabled: rgba(255, 255, 255, 0.3);
-    --theme-palette-action-disabled-background: rgba(255, 255, 255, 0.12);
+    --theme-palette-action-hover-opacity: 0.04;
+    --theme-palette-action-selected: rgba(0, 0, 0, 0.08);
+    --theme-palette-action-selected-opacity: 0.8;
+    --theme-palette-action-disabled: rgba(0, 0, 0, 0.26);
+    --theme-palette-action-disabled-background: rgba(0, 0, 0, 0.12);
     --theme-palette-action-disabled-opacity: 0.38;
-    --theme-palette-action-focus: rgba(255, 255, 255, 0.12);
+    --theme-palette-action-focus: rgba(0, 0, 0, 0.12);
     --theme-palette-action-focus-opacity: 0.12;
-    --theme-palette-action-activated-opacity: 0.24;
+    --theme-palette-action-activated-opacity: 0.12;
   }
 
   :global(html.theme-dark) {
     /* palette */
-    --theme-palette-primary-main: #303030;
-    --theme-palette-primary-contrast-text: white;
+    /* --theme-palette-primary-main: #303030;
+    --theme-palette-primary-contrast-text: white; */
 
     /* text */
     --theme-palette-text-primary: var(--theme-colors-common-white);
@@ -287,5 +287,9 @@
   }
   :global(.p6) {
     padding: calc(var(--theme-spacing) * 6);
+  }
+
+  :global(.mt2) {
+    margin-top: calc(var(--theme-spacing) * 2);
   }
 </style>

@@ -1,11 +1,18 @@
-import '@fortawesome/fontawesome-free/css/all.css'
+require('source-map-support').install()
+import {WebApp} from '/server'
+import debug from 'debug'
 
-import App from './Docs.svelte'
+log = debug('svelte-mui:index')
 
-app = new App {
-	target: document.getElementById('app')
-	props: {
-	}
-}
+host = WebApp.get('host')
+port = WebApp.get('port')
+server = WebApp.listen(port)
 
-export default app
+log 'starting-server'
+
+process.on 'unhandledRejection', (reason, p) ->
+  log 'Unhandled Rejection at: Promise ', p, reason
+
+server.on 'listening', ->
+  log 'Feathers application started on http://%s:%d', host, port
+

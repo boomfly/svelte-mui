@@ -191,6 +191,14 @@
     border-color: inherit;
   }
 
+  .root .icon.start {
+    margin-right: calc(var(--theme-spacing) * 1);
+  }
+
+  .root .icon.end {
+    margin-left: calc(var(--theme-spacing) * 1);
+  }
+
   .root :global(.ripple) {
     position: absolute; /* The absolute position we mentioned earlier */
     border-radius: 50%;
@@ -217,8 +225,14 @@
   on:click={createRipple}
   on:click
 >
+  <span class='start icon'>
+    <slot name='start-icon'></slot>
+  </span>
   <span class='label'>
     <slot></slot>
+  </span>
+  <span class='end icon'>
+    <slot name='end-icon'></slot>
   </span>
   <span class='ripple'></span>
 </button>

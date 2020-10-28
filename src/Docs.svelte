@@ -2,6 +2,7 @@
   import {getContext} from 'svelte'
   import ThemeProvider from '/mui/styles/ThemeProvider'
 
+  import Box from '/mui/Box'
   import Button from '/mui/Button'
   import Paper from '/mui/Paper'
   import Grid from '/mui/Grid'
@@ -41,19 +42,32 @@
   
   <br />
 
+  
+  <Box p={2} m={2} mb={5}>
+    <Paper variant='outlined' style='height: 50px'></Paper>
+  </Box>
+
   <Paper class='p2' elevation={5}>
     <Button on:click={toggleTheme} variant='contained' disabled={false}>Toggle Theme</Button>
   </Paper>
 
-  <Paper class='p2'>
-    <Button variant='contained'>Default</Button>
+  <Paper class='p2 mt2'>
+    <Button variant='contained'>
+      <i slot='start-icon' class='fas fa-users fa-fw'></i>
+      Default
+      <i slot='end-icon' class='fas fa-home fa-fw'></i>
+    </Button>
     <Button variant='contained' color='primary'>Primary</Button>
     <Button variant='contained' color='secondary'>Secondary</Button>
     <Button variant='contained' disabled>Disabled</Button>
   </Paper>
 
   <Paper class='p2 mt2'>
-    <Button variant='outlined'>Default</Button>
+    <Button variant='outlined'>
+      <i slot='start-icon' class='fas fa-users fa-fw'></i>
+      Default
+      <i slot='end-icon' class='fas fa-home fa-fw'></i>
+    </Button>
     <Button variant='outlined' color='primary'>Primary</Button>
     <Button variant='outlined' color='secondary'>Secondary</Button>
     <Button variant='outlined' disabled>Disabled</Button>

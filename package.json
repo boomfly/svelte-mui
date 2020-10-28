@@ -21,5 +21,8 @@
     "svelte-check": "^1.0.36",
     "svelte-material-ui": "^1.0.0",
     "svelte-preprocess": "^4.2.1"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1"
   }
 }

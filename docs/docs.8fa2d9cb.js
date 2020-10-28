@@ -50,4 +50,4 @@ var t=arguments[3];function e(){}Object.defineProperty(exports,"__esModule",{val
 },{"svelte/internal":"rQuG","svelte":"aM84","../mui/styles/ThemeProvider":"S28Q","../mui/Box":"QJhL","../mui/Button":"qwYB","../mui/Paper":"OWhU","../mui/Grid":"HJsh","../mui/AppBar":"tq7x","../mui/Typography":"xGYu","../mui/FormLabel":"IiaJ"}],"ZtFL":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0,require("@fortawesome/fontawesome-free/css/all.css");var e,t=r(require("./Docs.svelte"));function r(e){return e&&e.__esModule?e:{default:e}}var s=e=new t.default({target:document.getElementById("app"),props:{}});exports.default=s;
 },{"@fortawesome/fontawesome-free/css/all.css":"WUKt","./Docs.svelte":"Fi1L"}]},{},["ZtFL"], null)
-//# sourceMappingURL=/docs.b620d9f2.js.map
+//# sourceMappingURL=docs.8fa2d9cb.js.map

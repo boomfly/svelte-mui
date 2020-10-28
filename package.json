@@ -6,6 +6,7 @@
   "scripts": {
     "start": "parcel --no-cache --public-url '/' --out-dir build src/index.html",
     "build": "npm run docs:build",
+    "lib:start": "parcel watch -t browser --no-cache --public-url '/' --out-dir build/lib src/mui/index.coffee",
     "lib:build": "parcel build -t browser --no-cache --public-url '/' --out-dir build/lib src/mui/index.coffee",
     "docs:start": "concurrently -n 'compile-server,compile-client,runtime' 'npm:docs:compile-server' 'npm:docs:compile-client' 'npm:docs:server'",
     "docs:clean": "rm -rf build/docs/*",

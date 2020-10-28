@@ -1,1 +1,1 @@
-export * from './styles'
+export {defaultTheme, ThemeProvider} from './styles'

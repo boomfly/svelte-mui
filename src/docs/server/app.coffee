@@ -23,7 +23,7 @@ app = express feathers()
 
 import App from '../client/Index.svelte'
 
-template = Handlebars.compile(fs.readFileSync("#{process.cwd()}/build/docs/public/index.html").toString())
+template = Handlebars.compile(fs.readFileSync("#{process.cwd()}/dist/docs/public/index.html").toString())
 
 # Load app configuration
 app.configure configuration()
@@ -35,7 +35,7 @@ app.use express.json()
 app.use express.urlencoded({ extended: true })
 # app.use favicon(path.join(app.get('public'), 'favicon.png'))
 # Host the public folder
-app.use '/', express.static('build/docs/public', {index: false})
+app.use '/', express.static('dist/docs/public', {index: false})
 
 # Set up Plugins and providers
 app.configure express.rest()

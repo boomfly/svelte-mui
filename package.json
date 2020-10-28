@@ -6,6 +6,11 @@
   "scripts": {
     "start": "parcel --no-cache --public-url '/' --out-dir build src/index.html",
     "build": "parcel build --no-cache --public-url '/' --out-dir build src/index.html",
+
+    "start-docs": "parcel --no-cache --public-url '/' --out-dir docs src/docs/index.html",
+    "build-docs": "npm run clean-docs && parcel build --no-cache --public-url '/' --out-dir docs src/docs/index.html",
+    "clean-docs": "rm -rf docs/*",
+
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

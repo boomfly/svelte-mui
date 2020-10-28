@@ -1,26 +1,38 @@
 {
-  "name": "svelte-mui",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "parcel --no-cache --public-url '/' --out-dir build src/index.html",
-    "build": "npm run docs:build",
-    "lib:start": "parcel watch -t node --no-cache --public-url '/' --out-dir build/lib src/mui/index.coffee",
-    "lib:build": "parcel build -t browser --no-cache --public-url '/' --out-dir build/lib src/mui/index.coffee",
-    "docs:start": "concurrently -n 'compile-server,compile-client,runtime' 'npm:docs:compile-server' 'npm:docs:compile-client' 'npm:docs:server'",
-    "docs:clean": "rm -rf build/docs/*",
-    "docs:build": "npm run docs:clean && npm run docs:build-client && npm run docs:build-server",
-    "docs:server": "DEBUG=svelte-mui:* DEBUG_COLORS=true nodemon --ignore db/ --ignore .cache/ --ignore build/docs/client/ build/docs/index.js",
-    "docs:compile-server": "TARGET=node parcel watch -t node --no-cache --out-dir build/docs src/docs/index.coffee",
-    "docs:compile-client": "parcel watch --out-dir build/docs/public src/docs/client/index.html",
-    "docs:build-client": "parcel build --no-cache --no-source-maps --out-dir build/docs/public src/docs/client/index.html",
-    "docs:build-server": "TARGET=node parcel build -t node --no-cache --no-source-maps --out-dir build/docs src/docs/index.coffee",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "svelte-material-design",
+  "version": "0.0.1-beta1",
+  "description": "Svelte Material Design Components",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/boomfly/svelte-mui.git"
+  },
+  "homepage": "https://svelte-mui.herokuapp.com",
+  "bugs": {
+    "url" : "https://github.com/boomfly/svelte-mui/issues",
+    "email" : "boomfly@rambler.ru"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Ivan Chalyk <boomfly@rambler.ru>",
+  "license": "MIT",
+  "main": "dist/node/index.js",
+  "browser": "dist/browser/index.js",
+  "scripts": {
+    "start": "parcel --no-cache --public-url '/' --out-dir dist src/index.html",
+    "build": "npm run docs:build",
+    "test:start": "parcel watch--no-cache --public-url '/' --out-dir dist/test src/index.html",
+    "lib:start": "parcel watch --no-cache --public-url '/' --out-dir dist/lib src/mui/index.coffee",
+    "lib:build-browser": "parcel build -t browser --no-cache --public-url '/' --out-dir dist/browser src/mui/index.coffee",
+    "lib:build-node": "TARGET=node parcel build -t browser --no-cache --public-url '/' --out-dir dist/node src/mui/index.coffee",
+    "docs:start": "concurrently -n 'compile-server,compile-client,runtime' 'npm:docs:compile-server' 'npm:docs:compile-client' 'npm:docs:server'",
+    "docs:clean": "rm -rf dist/docs/*",
+    "docs:build": "npm run docs:clean && npm run docs:build-client && npm run docs:build-server",
+    "docs:server": "DEBUG=svelte-mui:* DEBUG_COLORS=true nodemon --ignore db/ --ignore .cache/ --ignore dist/docs/client/ dist/docs/index.js",
+    "docs:compile-server": "TARGET=node parcel watch -t node --no-cache --out-dir dist/docs src/docs/index.coffee",
+    "docs:compile-client": "parcel watch --out-dir dist/docs/public src/docs/client/index.html",
+    "docs:build-client": "parcel build --no-cache --no-source-maps --out-dir dist/docs/public src/docs/client/index.html",
+    "docs:build-server": "TARGET=node parcel build -t node --no-cache --no-source-maps --out-dir dist/docs src/docs/index.coffee",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "devDependencies": {
     "coffeescript": "^2.5.1",
     "concurrently": "^5.3.0",

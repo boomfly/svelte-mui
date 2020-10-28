@@ -1,1 +1,1 @@
-web: node build/docs/index.js
+web: node dist/docs/index.js

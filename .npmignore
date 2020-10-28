@@ -1,0 +1,10 @@
+.cache
+node_modules
+Procfile
+svelte.config.js
+.sassrc
+.parcelrc
+dist/docs
+src/docs
+config
+compile.js

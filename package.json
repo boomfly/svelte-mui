@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel --no-cache --public-url '/' --out-dir build src/index.html",
     "docs:start": "concurrently -n 'compile-server,compile-client,runtime' 'npm:docs:compile-server' 'npm:docs:compile-client' 'npm:docs:server'",
-    "build": "npm run build-docs",
+    "build": "npm run docs:build",
     "build-lib": "parcel build --no-cache --public-url '/' --out-dir build src/index.html",
     "start-docs": "parcel --no-cache --public-url '/' --out-dir build/docs src/docs/index.html",
     "docs:clean": "rm -rf build/docs/*",

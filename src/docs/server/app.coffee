@@ -35,7 +35,7 @@ app.use express.json()
 app.use express.urlencoded({ extended: true })
 # app.use favicon(path.join(app.get('public'), 'favicon.png'))
 # Host the public folder
-app.use '/', express.static('build/docs/public')
+app.use '/', express.static('build/docs/public', {index: false})
 
 # Set up Plugins and providers
 app.configure express.rest()
@@ -49,7 +49,7 @@ app.configure services
 # Set up event channels (see channels.js)
 app.configure channels
 
-app.get '*', (req, res, next) ->
+indexHandler = (req, res, next) ->
   # res.sendFile "#{process.cwd()}/build/public/index.html"
   {html, css} = App.render()
   # console.log html
@@ -58,6 +58,8 @@ app.get '*', (req, res, next) ->
   }
   res.send result
 
+# app.get '/', indexHandler
+app.get '*', indexHandler
 
 
 # Configure a middleware for 404s and the error handler

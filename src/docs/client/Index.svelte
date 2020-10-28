@@ -10,9 +10,14 @@
   import Typography from '../mui/Typography'
   import FormLabel from '../mui/FormLabel'
 
-  theme = localStorage.getItem('mui-theme') ? 'light'
+  storage = localStorage ? {
+    getItem: (name) -> 'light'
+    setItem: (name, value) -> value
+  }
 
-  (`$:`) localStorage.setItem('mui-theme', theme)
+  theme = storage.getItem('mui-theme') ? 'light'
+
+  (`$:`) storage.setItem('mui-theme', theme)
 
   spacing = 2
 

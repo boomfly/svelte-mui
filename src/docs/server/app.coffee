@@ -1,3 +1,6 @@
+import Handlebars from 'handlebars'
+import fs from 'fs'
+
 import path from 'path'
 import favicon from 'serve-favicon'
 import compress from 'compression'
@@ -17,6 +20,10 @@ import channels from './channels'
 import authentication from './authentication'
 
 app = express feathers()
+
+import App from '../client/Index.svelte'
+
+template = Handlebars.compile(fs.readFileSync("#{process.cwd()}/build/docs/public/index.html").toString())
 
 # Load app configuration
 app.configure configuration()
@@ -43,7 +50,15 @@ app.configure services
 app.configure channels
 
 app.get '*', (req, res, next) ->
-  res.sendFile "#{process.cwd()}/build/public/index.html"
+  # res.sendFile "#{process.cwd()}/build/public/index.html"
+  {html, css} = App.render()
+  # console.log html
+  result = template {
+    content: html
+  }
+  res.send result
+
+
 
 # Configure a middleware for 404s and the error handler
 app.use express.notFound()

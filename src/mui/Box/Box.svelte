@@ -29,7 +29,7 @@
         result.style += "--#{key}: #{value};"
         result.classes += "#{space}#{key}"
         space = ' ' unless space
-    console.log 'style', result
+    #console.log 'style', result
     result
   )
   

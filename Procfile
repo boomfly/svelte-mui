@@ -1,0 +1,1 @@
+web: node build/docs/index.js

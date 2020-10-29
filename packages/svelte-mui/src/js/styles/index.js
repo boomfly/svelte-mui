@@ -1,6 +1,6 @@
 export {
   currentTheme
-} from './store.coffee';
+} from './store.js';
 
 export {
   default as ThemeProvider

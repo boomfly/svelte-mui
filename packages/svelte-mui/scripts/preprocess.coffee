@@ -23,26 +23,12 @@ glob 'src/coffee/**/*.svelte', {}, (_, files) ->
     process.chdir(path.join(BASE, dirname))
 
     pattern = /(?<begin>import|export)(?<middle>\s+.+\s*?from\s*?["'].*?)(?<ext>\.coffee)(?<end>['"])/g
-    # match = source.test(pattern)
     match = pattern.exec(source)
     if match
       source = source.replace pattern, (...args) ->
         {begin, middle, ext, end} = params = args[args.length - 1]
-        # console.log params
         "#{begin}#{middle}.js#{end}"
-      # console.log 'result', result
-
-    # while (match = pattern.exec(source)) isnt null
-    #   # console.log match
-    #   console.log file, [...match]
-    #   # source.replace pattern, (args) ->
-    #   #   console.log args
-    #   # console.log file, match
-    #   # console.log source.replace pattern, '.js'
-    # if match
-    #   console.log source.replace /.coffee/g, '.js'
-
-
+      
     { code } = await preprocess(source, processor, { filename })
     code = code.replace /\slang=['"](coffeescript|coffee)['"]/, ''
     outFolder = path.join(BASE, path.dirname(file.replace('coffee', 'js')))
@@ -58,6 +44,13 @@ glob 'src/coffee/**/*.coffee', {}, (_, files) ->
 
     # console.log source
     # console.log file, source.match(/(import|export)\s+.+\s*?from\s*?["'].*?(\.coffee)['"]([.*$]|$|)/g)
+
+    pattern = /(?<begin>import|export)(?<middle>\s+.+\s*?from\s*?["'].*?)(?<ext>\.coffee)(?<end>['"])/g
+    match = pattern.exec(source)
+    if match
+      source = source.replace pattern, (...args) ->
+        {begin, middle, ext, end} = params = args[args.length - 1]
+        "#{begin}#{middle}.js#{end}"
     
     # code = coffeesript.compile source, {transpile: {presets: ['@babel/env']}}
     code = coffeesript.compile source

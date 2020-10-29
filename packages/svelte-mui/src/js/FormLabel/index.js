@@ -1,3 +1,3 @@
 export {
   default
-} from './FormLabel';
+} from './FormLabel.svelte';

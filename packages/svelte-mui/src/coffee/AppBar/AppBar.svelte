@@ -1,7 +1,7 @@
 <script lang='coffee'>
-  import Element from '../common/Element'
-  import Paper from '../Paper'
-  import {currentTheme} from '../styles'
+  import Element from '../common/Element.svelte'
+  import Paper from '../Paper/index.coffee'
+  import {currentTheme} from '../styles/index.coffee'
   export position = 'static'
   export color = 'default'
   export headerStyle = ''

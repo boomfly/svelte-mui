@@ -1,12 +1,12 @@
 <script>var _className, props, ref, restProps, result, style;
 
-import Element from '../common/Element';
+import Element from '../common/Element.svelte';
 
-import Paper from '../Paper';
+import Paper from '../Paper/index.js';
 
 import {
   currentTheme
-} from '../styles';
+} from '../styles/index.js';
 
 export var position = 'static';
 

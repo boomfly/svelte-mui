@@ -1,8 +1,5 @@
 <script lang='coffee'>
   import {onMount} from 'svelte'
-  export container = false
-  export item = false
-  export zeroMinWidth = false
   export p = null
   export pt = null
   export pb = null

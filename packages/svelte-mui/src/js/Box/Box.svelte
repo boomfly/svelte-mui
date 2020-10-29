@@ -4,12 +4,6 @@ import {
   onMount
 } from 'svelte';
 
-export var container = false;
-
-export var item = false;
-
-export var zeroMinWidth = false;
-
 export var p = null;
 
 export var pt = null;

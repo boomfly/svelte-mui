@@ -5,12 +5,15 @@
     
 </script>
 
-<style>
-
+<style lang='scss'>
+  .root {
+    $color: white;
+    color: $color;
+  }
 </style>
 
 <ThemeProvider theme='dark' />
-<div>hello</div>
+<div class='root'>hello</div>
 <Paper class='m2'>
   <Box p={5}>
   </Box>

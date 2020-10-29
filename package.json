@@ -1,5 +1,6 @@
 {
-  "name": "svelte-material-design",
+  "private": true,
+  "name": "root",
   "version": "0.0.1-beta1",
   "description": "Svelte Material Design Components",
   "repository": {
@@ -20,7 +21,7 @@
     "start": "parcel --no-cache --public-url '/' --out-dir dist src/index.html",
     "build": "npm run docs:build",
     "test:start": "parcel watch--no-cache --public-url '/' --out-dir dist/test src/index.html",
-    "lib:start": "parcel watch --no-cache --public-url '/' --out-dir dist/lib src/mui/index.coffee",
+    "lib:start": "parcel watch --out-dir dist/lib src/mui/index.coffee",
     "lib:build-browser": "parcel build -t browser --no-cache --public-url '/' --out-dir dist/browser src/mui/index.coffee",
     "lib:build-node": "TARGET=node parcel build -t browser --no-cache --public-url '/' --out-dir dist/node src/mui/index.coffee",
     "docs:start": "concurrently -n 'compile-server,compile-client,runtime' 'npm:docs:compile-server' 'npm:docs:compile-client' 'npm:docs:server'",

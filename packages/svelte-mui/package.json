@@ -1,0 +1,41 @@
+{
+  "name": "@svelte-mui/core",
+  "version": "0.0.1-beta1",
+  "description": "Svelte Material Design Components",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/boomfly/svelte-mui.git"
+  },
+  "homepage": "https://svelte-mui.herokuapp.com",
+  "bugs": {
+    "url" : "https://github.com/boomfly/svelte-mui/issues",
+    "email" : "boomfly@rambler.ru"
+  },
+  "keywords": [],
+  "author": "Ivan Chalyk <boomfly@rambler.ru>",
+  "license": "MIT",
+  "main": "dist/node/index.js",
+  "browser": "dist/browser/index.js",
+  "scripts": {
+    "start": "parcel --no-cache --public-url '/' --out-dir dist src/index.html",
+    "build": "npm run docs:build",
+    "test:start": "parcel watch--no-cache --public-url '/' --out-dir dist/test src/index.html",
+    "lib:start": "parcel watch --no-cache --public-url '/' --out-dir dist/lib src/mui/index.coffee",
+    "lib:build-browser": "parcel build -t browser --no-cache --public-url '/' --out-dir dist/browser src/mui/index.coffee",
+    "lib:build-node": "TARGET=node parcel build -t browser --no-cache --public-url '/' --out-dir dist/node src/mui/index.coffee",
+    "preprocess": "coffee ./scripts/preprocess.coffee",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "coffeescript": "^2.5.1",
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6",
+    "parcel": "^1.12.4",
+    "parcel-plugin-svelte": "^4.0.6",
+    "svelte-preprocess": "^4.2.1",
+    "source-map-support": "^0.5.19"
+  },
+  "dependencies": {
+    "svelte": "^3.24.1"
+  }
+}

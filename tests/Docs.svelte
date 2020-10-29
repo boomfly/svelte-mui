@@ -29,8 +29,10 @@
     
 </script>
 
-<style>
-  
+<style lang='scss'>
+  .root {
+    color: 'black'
+  }
 </style>
 
 <ThemeProvider {theme} />

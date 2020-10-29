@@ -1,0 +1,69 @@
+{
+  "private": true,
+  "name": "@svelte-mui/docs",
+  "version": "0.0.1-beta1",
+  "description": "Svelte Material Design Components",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/boomfly/svelte-mui.git"
+  },
+  "homepage": "https://svelte-mui.herokuapp.com",
+  "bugs": {
+    "url": "https://github.com/boomfly/svelte-mui/issues",
+    "email": "boomfly@rambler.ru"
+  },
+  "keywords": [],
+  "author": "Ivan Chalyk <boomfly@rambler.ru>",
+  "license": "MIT",
+  "main": "dist/node/index.js",
+  "browser": "dist/browser/index.js",
+  "scripts": {
+    "start": "parcel --no-cache --public-url '/' --out-dir dist src/client/index.html",
+    "build": "npm run docs:build",
+    "test:start": "parcel watch--no-cache --public-url '/' --out-dir dist/test src/index.html",
+    "docs:start": "concurrently -n 'compile-server,compile-client,runtime' 'npm:docs:compile-server' 'npm:docs:compile-client' 'npm:docs:server'",
+    "docs:clean": "rm -rf dist/*",
+    "docs:build": "npm run docs:clean && npm run docs:build-client && npm run docs:build-server",
+    "docs:server": "DEBUG=svelte-mui:* DEBUG_COLORS=true nodemon --ignore db/ --ignore .cache/ --ignore dist/public/ dist/index.js",
+    "docs:compile-server": "TARGET=node parcel watch -t node --no-cache --out-dir dist/ src/client/index.coffee",
+    "docs:compile-client": "parcel watch --out-dir dist/public src/client/index.html",
+    "docs:build-client": "parcel build --no-cache --no-source-maps --out-dir dist/public src/client/index.html",
+    "docs:build-server": "TARGET=node parcel build -t node --no-cache --no-source-maps --out-dir dist src/index.coffee",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "coffeescript": "^2.5.1",
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6",
+    "parcel": "^1.12.4",
+    "parcel-plugin-svelte": "^4.0.6",
+    "svelte-check": "^1.0.36",
+    "svelte-preprocess": "^4.2.1",
+    "@fortawesome/fontawesome-free": "^5.15.1"
+  },
+  "dependencies": {
+    "@svelte-mui/core": "0.0.1-beta1",
+    "svelte": "^3.24.1",
+    "@feathersjs/authentication": "^4.5.9",
+    "@feathersjs/authentication-client": "^4.5.9",
+    "@feathersjs/authentication-jwt": "^2.0.10",
+    "@feathersjs/authentication-local": "^4.5.9",
+    "@feathersjs/client": "^4.5.9",
+    "@feathersjs/configuration": "^4.5.9",
+    "@feathersjs/errors": "^4.5.9",
+    "@feathersjs/express": "^4.5.9",
+    "@feathersjs/feathers": "^4.5.9",
+    "@feathersjs/socketio": "^4.5.9",
+    "@feathersjs/socketio-client": "^4.5.9",
+    "compression": "^1.7.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "feathers-nedb": "^5.1.0",
+    "handlebars": "^4.7.6",
+    "helmet": "^3.15.0",
+    "lowdb": "^1.0.0",
+    "nedb": "^1.8.0",
+    "serve-favicon": "^2.5.0",
+    "source-map-support": "^0.5.19"
+  }
+}

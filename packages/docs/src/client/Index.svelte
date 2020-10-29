@@ -1,14 +1,14 @@
 <script lang='coffee'>
   import {getContext} from 'svelte'
-  import ThemeProvider from '../mui/styles/ThemeProvider'
+  import ThemeProvider from '@svelte-mui/core/src/js/styles/ThemeProvider'
 
-  import Box from '../mui/Box'
-  import Button from '../mui/Button'
-  import Paper from '../mui/Paper'
-  import Grid from '../mui/Grid'
-  import AppBar from '../mui/AppBar'
-  import Typography from '../mui/Typography'
-  import FormLabel from '../mui/FormLabel'
+  #import Box from '@svelte-mui/core/Box'
+  #import Button from '@svelte-mui/core/Button'
+  #import Paper from '@svelte-mui/core/Paper'
+  #import Grid from '@svelte-mui/core/Grid'
+  #import AppBar from '@svelte-mui/core/AppBar'
+  #import Typography from '@svelte-mui/core/Typography'
+  #import FormLabel from '@svelte-mui/core/FormLabel'
 
   storage = localStorage ? {
     getItem: (name) -> 'light'
@@ -40,7 +40,7 @@
 
 <ThemeProvider {theme} />
 
-<div class='root'>
+<!-- <div class='root'>
   <AppBar class='p2' color='default' position='static'>
     <Typography variant='h5'>Messages</Typography>
   </AppBar>
@@ -133,4 +133,4 @@
       {/each}
     </Grid>
   </div>
-</div>
+</div> -->

@@ -1,28 +1,31 @@
-<script lang='coffee'>
-  export variant = 'text'
-  export color = 'inherit'
-  export disabled = false
+<script>var createRipple, result, style;
 
-  (`$:`) style = (
-    result = ''
-  )
+export var variant = 'text';
 
-  createRipple = (event) ->
-    button = event.currentTarget
-    circle = document.createElement('span')
-    diameter = Math.max(button.clientWidth, button.clientHeight)
-    radius = diameter / 2
-    circle.style.width = circle.style.height = "#{diameter}px"
-    #circle.style.left = "#{event.clientX - (button.offsetLeft + radius)}px"
-    #circle.style.top = "#{event.clientY - (button.offsetTop + radius)}px"
-    circle.style.left = "#{event.offsetX - radius}px"
-    circle.style.top = "#{event.offsetY - radius}px"
-    circle.classList.add('ripple')
+export var color = 'inherit';
 
-    ripple = button.getElementsByClassName('ripple')[0]
-    if ripple
-      ripple.remove()
-    button.appendChild(circle)
+export var disabled = false;
+
+$:(style = (result = ''));
+
+createRipple = function(event) {
+  var button, circle, diameter, radius, ripple;
+  button = event.currentTarget;
+  circle = document.createElement('span');
+  diameter = Math.max(button.clientWidth, button.clientHeight);
+  radius = diameter / 2;
+  circle.style.width = circle.style.height = `${diameter}px`;
+  //circle.style.left = "#{event.clientX - (button.offsetLeft + radius)}px"
+  //circle.style.top = "#{event.clientY - (button.offsetTop + radius)}px"
+  circle.style.left = `${event.offsetX - radius}px`;
+  circle.style.top = `${event.offsetY - radius}px`;
+  circle.classList.add('ripple');
+  ripple = button.getElementsByClassName('ripple')[0];
+  if (ripple) {
+    ripple.remove();
+  }
+  return button.appendChild(circle);
+};
 </script>
 
 <style>

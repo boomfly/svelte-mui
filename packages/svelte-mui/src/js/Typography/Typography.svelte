@@ -1,47 +1,35 @@
-<script lang='coffee'>
-  export variant = 'body1'
-  export component = 'p'
-  export color = 'initial'
-  export align = 'inherit'
-  export display = 'initial'
-  export nowrap = false
-  export gutterBottom = false
-  export paragraph = false
+<script>var classes, props, result, style;
 
-  (`$:`) style = (->
-    result =
-    """
-    --font-family: var(--theme-typography-#{variant}-font-family);
-    --font-weight: var(--theme-typography-#{variant}-font-weight);
-    --font-size: var(--theme-typography-#{variant}-font-size);
-    --line-height: var(--theme-typography-#{variant}-line-height);
-    --letter-spacing: var(--theme-typography-#{variant}-letter-spacing);
-    """
-    if variant is 'overline'
-      result += "--text-transform: var(--theme-typography-#{variant}-text-transform);"
-    #console.log 'style', result
-    result
-  )()
+export var variant = 'body1';
 
-  (`$:`) classes = (->
-    result = ''
-    if color isnt 'initial'
-      result += "color-#{color} "
-    if align isnt 'inherit'
-      result += "align-#{align} "
-    if display isnt 'initial'
-      result += "display-#{display} "
-    if nowrap
-      result += "nowrap "
-    if gutterBottom
-      result += "gutter-bottom "
-    if paragraph
-      result += "paragraph "
-    #console.log 'classes', result, color
-    result
-  )()
+export var component = 'p';
 
-  (`$:`) props = {class: "root #{classes} #{$$props.class}", style: "#{style} #{$$props.style}"}
+export var color = 'initial';
+
+export var align = 'inherit';
+
+export var display = 'initial';
+
+export var nowrap = false;
+
+export var gutterBottom = false;
+
+export var paragraph = false;
+
+$:(style = (result = `--font-family: var(--theme-typography-${variant}-font-family);
+--font-weight: var(--theme-typography-${variant}-font-weight);
+--font-size: var(--theme-typography-${variant}-font-size);
+--line-height: var(--theme-typography-${variant}-line-height);
+--letter-spacing: var(--theme-typography-${variant}-letter-spacing);`, variant === 'overline' ? result += `--text-transform: var(--theme-typography-${//console.log 'style', result
+variant}-text-transform);` : void 0, result));
+
+$:(classes = (result = '', color !== 'initial' ? result += `color-${color} ` : void 0, align !== 'inherit' ? result += `align-${align} ` : void 0, display !== 'initial' ? result += `display-${//console.log 'classes', result, color
+display} ` : void 0, nowrap ? result += "nowrap " : void 0, gutterBottom ? result += "gutter-bottom " : void 0, paragraph ? result += "paragraph " : void 0, result));
+
+$:(props = {
+  class: `root ${classes} ${$$props.class}`,
+  style: `${style} ${$$props.style}`
+});
 </script>
 
 <style>

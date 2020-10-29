@@ -1,18 +1,19 @@
-import { preprocess } from 'svelte/compiler'
-import fs from 'fs'
-import path from 'path'
-import glob from 'glob'
-import sveltePreprocess from 'svelte-preprocess'
-import process from 'process'
-import del from 'del'
+{ preprocess } = require('svelte/compiler')
+fs = require('fs')
+path = require('path')
+glob = require('glob')
+sveltePreprocess = require('svelte-preprocess')
+process = require('process')
+del = require('del')
+coffeesript = require 'coffeescript'
 
 BASE = process.cwd()
 processor = sveltePreprocess {
   scss:
     includePaths: [path.join(BASE, 'theme')]
-})
+}
 
-del.sync ['dist/**']
+del.sync ['src/js/**', '!src/js/README.md']
 
 glob 'src/coffee/**/*.svelte', {}, (_, files) ->
   for file in files
@@ -21,15 +22,19 @@ glob 'src/coffee/**/*.svelte', {}, (_, files) ->
     dirname = path.dirname(file)
     process.chdir(path.join(BASE, dirname))
     { code } = await preprocess(source, processor, { filename })
-    outFolder = path.join(BASE, path.dirname(file.replace('src', 'dist')))
+    code = code.replace /\slang=['"](coffeescript|coffee)['"]/, ''
+    outFolder = path.join(BASE, path.dirname(file.replace('coffee', 'js')))
     fs.mkdirSync(outFolder, { recursive: true })
     fs.writeFileSync(path.join(outFolder, filename), code)
 
 process.chdir(BASE)
 
-glob 'src/**/*.js', {}, (_, files) ->
+glob 'src/coffee/**/*.coffee', {}, (_, files) ->
   files.forEach (file) ->
-    outFolder = path.join(BASE, path.dirname(file.replace('src', 'dist')))
-    filename = path.basename(file)
+    source = fs.readFileSync(path.join(BASE, file), 'utf-8')
+    filename = path.basename(file.replace('.coffee', '.js'))
+    code = coffeesript.compile source
+    outFolder = path.join(BASE, path.dirname(file.replace('coffee', 'js')))
     fs.mkdirSync(outFolder, { recursive: true })
-    fs.copyFileSync(path.join(BASE, file), path.join(outFolder, filename))
+    # fs.copyFileSync(path.join(BASE, file), path.join(outFolder, filename))
+    fs.writeFileSync(path.join(outFolder, filename), code)

@@ -262,6 +262,7 @@ $:((typeof document !== "undefined" && document !== null ? document.documentElem
 
   :global(body) {
     margin: 0;
+    padding: 0;
     color: var(--theme-palette-text-primary);
     font-family: var(--theme-typography-body2-font-family);
     font-size: var(--theme-typography-body2-font-size);

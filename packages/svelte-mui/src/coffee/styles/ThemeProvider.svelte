@@ -2,7 +2,7 @@
   import {onMount, afterUpdate, setContext} from 'svelte'
   import {writable} from 'svelte/store'
   import Colors from './Colors.svelte'
-  import {currentTheme} from './store'
+  import {currentTheme} from './store.coffee'
 
   export theme = 'light'
 

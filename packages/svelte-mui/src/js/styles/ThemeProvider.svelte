@@ -12,7 +12,7 @@ import Colors from './Colors.svelte';
 
 import {
   currentTheme
-} from './store';
+} from './store.js';
 
 export var theme = 'light';
 

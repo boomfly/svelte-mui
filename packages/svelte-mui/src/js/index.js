@@ -14,11 +14,6 @@ export {
 
 export {
   // export * from './Paper'
-  default as Box
-} from './Box';
-
-export {
-  // export * from './Box'
   default as Grid
 } from './Grid';
 

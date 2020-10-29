@@ -301,7 +301,16 @@ $:((typeof document !== "undefined" && document !== null ? document.documentElem
   :global(.m9) {margin: calc(var(--theme-spacing) * 9)}
   :global(.m10) {margin: calc(var(--theme-spacing) * 10)}
   
-  :global(.mt2) {
-    margin-top: calc(var(--theme-spacing) * 2);
-  }
+  :global(.mt2) {margin-top: calc(var(--theme-spacing) * 2);}
+
+  :global(.ml1) {margin-top: calc(var(--theme-spacing) * 1)}
+  :global(.ml2) {margin-top: calc(var(--theme-spacing) * 2)}
+  :global(.ml3) {margin-top: calc(var(--theme-spacing) * 3)}
+  :global(.ml4) {margin-top: calc(var(--theme-spacing) * 4)}
+  :global(.ml5) {margin-top: calc(var(--theme-spacing) * 5)}
+  :global(.ml6) {margin-top: calc(var(--theme-spacing) * 6)}
+  :global(.ml7) {margin-top: calc(var(--theme-spacing) * 7)}
+  :global(.ml8) {margin-top: calc(var(--theme-spacing) * 8)}
+  :global(.ml9) {margin-top: calc(var(--theme-spacing) * 9)}
+  :global(.ml10) {margin-top: calc(var(--theme-spacing) * 10)}
 </style>

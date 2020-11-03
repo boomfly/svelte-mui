@@ -1,3 +1,3 @@
 export {
   default
-} from './Box.svelte';
+} from './Box';

@@ -1,4 +1,4 @@
-{ preprocess } = require('svelte/compiler')
+svelte = require('svelte/compiler')
 fs = require('fs')
 path = require('path')
 glob = require('glob')
@@ -18,7 +18,8 @@ del.sync ['src/js/**', '!src/js/README.md']
 glob 'src/coffee/**/*.svelte', {}, (_, files) ->
   for file in files
     source = fs.readFileSync(path.join(BASE, file), 'utf-8')
-    filename = path.basename(file)
+    # filename = path.basename(file)
+    filename = path.basename(file.replace('.svelte', '.js'))
     dirname = path.dirname(file)
     process.chdir(path.join(BASE, dirname))
 
@@ -29,11 +30,16 @@ glob 'src/coffee/**/*.svelte', {}, (_, files) ->
         {begin, middle, ext, end} = params = args[args.length - 1]
         "#{begin}#{middle}.js#{end}"
       
-    { code } = await preprocess(source, processor, { filename })
+    { code } = await svelte.preprocess(source, processor, { filename })
     code = code.replace /\slang=['"](coffeescript|coffee)['"]/, ''
+
+    {js} = svelte.compile code, {generate: 'ssr'}
+
+    # console.log 'compiled', js.code
+
     outFolder = path.join(BASE, path.dirname(file.replace('coffee', 'js')))
     fs.mkdirSync(outFolder, { recursive: true })
-    fs.writeFileSync(path.join(outFolder, filename), code)
+    fs.writeFileSync(path.join(outFolder, filename), js.code)
 
 process.chdir(BASE)
 

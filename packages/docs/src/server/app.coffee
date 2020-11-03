@@ -8,6 +8,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 
 import feathers from '@feathersjs/feathers'
+import config from 'config'
 import configuration from '@feathersjs/configuration'
 import express from '@feathersjs/express'
 import socketio from '@feathersjs/socketio'
@@ -17,13 +18,15 @@ import services from './services'
 import appHooks from './app.hooks'
 import channels from './channels'
 
-import authentication from './authentication'
+import authentication from './authentication.coffee'
 
 app = express feathers()
 
 import App from '../client/Index.svelte'
 
-template = Handlebars.compile(fs.readFileSync("#{process.cwd()}/dist/docs/public/index.html").toString())
+import indexTemplate from './templates/index.hbs'
+
+template = Handlebars.compile(indexTemplate)
 
 # Load app configuration
 app.configure configuration()
@@ -35,7 +38,7 @@ app.use express.json()
 app.use express.urlencoded({ extended: true })
 # app.use favicon(path.join(app.get('public'), 'favicon.png'))
 # Host the public folder
-app.use '/', express.static('dist/docs/public', {index: false})
+app.use '/', express.static('dist/public', {index: false})
 
 # Set up Plugins and providers
 app.configure express.rest()
@@ -52,10 +55,14 @@ app.configure channels
 indexHandler = (req, res, next) ->
   # res.sendFile "#{process.cwd()}/build/public/index.html"
   {html, css} = App.render()
-  # console.log html
+  
   result = template {
     content: html
+    css: css.code
+    htmlAttributes: 'class="theme-dark"'
   }
+  # console.log 'html', result, html
+  # result = 'Hello world'
   res.send result
 
 # app.get '/', indexHandler

@@ -1,3 +1,3 @@
 export {
   default
-} from './Typography.svelte';
+} from './Typography';

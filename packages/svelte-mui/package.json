@@ -15,29 +15,45 @@
   "keywords": [],
   "author": "Ivan Chalyk <boomfly@rambler.ru>",
   "license": "MIT",
-  "main": "./src/js/index.js",
-  "browser": "./src/js/index.js",
+  
+  "svelte": "./src/coffee/index.coffee",
   "scripts": {
     "start": "parcel --no-cache --public-url '/' --out-dir dist src/index.html",
-    "build": "npm run docs:build",
+    "build": "npm run preprocess && npm run build:legacy && npm run build:modern && npm run build:node && npm run build:stable",
+    "build:legacy": "node ../../scripts/build legacy",
+    "build:modern": "node ../../scripts/build modern",
+    "build:node": "node ../../scripts/build node",
+    "build:stable": "node ../../scripts/build stable",
+    "build:cjs": "node ../../scripts/build cjs",
+    "build:umd": "cross-env BABEL_ENV=stable rollup -c scripts/rollup.config.js",
     "test:start": "parcel watch--no-cache --public-url '/' --out-dir dist/test src/index.html",
     "lib:start": "parcel watch --no-cache --public-url '/' --out-dir dist/lib src/mui/index.coffee",
-    "lib:build-browser": "parcel build -t browser --no-cache --public-url '/' --out-dir dist/browser src/mui/index.coffee",
+    "lib:build-browser": "parcel build -t browser --no-cache --public-url '/' --out-dir dist/browser src/coffee/index.coffee",
     "lib:build-node": "TARGET=node parcel build -t browser --no-cache --public-url '/' --out-dir dist/node src/mui/index.coffee",
     "preprocess": "coffee ./scripts/preprocess.coffee",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@rollup/plugin-html": "^0.2.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-multi-entry": "^4.0.0",
     "coffeescript": "^2.5.1",
     "concurrently": "^5.3.0",
     "del": "^6.0.0",
     "nodemon": "^2.0.6",
     "parcel": "^1.12.4",
     "parcel-plugin-svelte": "^4.0.6",
+    "rollup-plugin-coffee-script": "^2.0.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-css-only": "^2.1.0",
+    "rollup-plugin-multi-input": "^1.1.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-svelte": "^6.1.0",
     "source-map-support": "^0.5.19",
     "svelte-preprocess": "^4.2.1"
   },
   "dependencies": {
-    "svelte": "^3.24.1"
+    "svelte": "^3.24.1",
+    "@babel/runtime": "^7.4.4"
   }
 }

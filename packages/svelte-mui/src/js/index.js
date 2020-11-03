@@ -1,40 +1,40 @@
 export {
   defaultTheme,
   ThemeProvider
-} from './styles/index.js';
+} from './styles';
 
 export {
   default as Typography
-} from './Typography/index.js';
+} from './Typography';
 
 export {
   // export * from './Typography'
   default as Paper
-} from './Paper/index.js';
+} from './Paper';
 
 export {
   // export * from './Paper'
   default as Grid
-} from './Grid/index.js';
+} from './Grid';
 
 export {
   // export * from './Grid'
   default as Box
-} from './Box/index.js';
+} from './Box';
 
 export {
   // export * from './Box'
   default as Button
-} from './Button/index.js';
+} from './Button';
 
 export {
   // export * from './Button'
   default as FormLabel
-} from './FormLabel/index.js';
+} from './FormLabel';
 
 export {
   // export * from './FormLabel'
   default as AppBar
-} from './AppBar/index.js';
+} from './AppBar';
 
 // export * from './AppBar'

@@ -1,7 +1,7 @@
 export {
   currentTheme
-} from './store.js';
+} from './store';
 
 export {
   default as ThemeProvider
-} from './ThemeProvider.svelte';
+} from './ThemeProvider';

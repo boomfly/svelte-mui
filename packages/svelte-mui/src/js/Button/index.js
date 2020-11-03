@@ -1,3 +1,3 @@
 export {
   default
-} from './Button.svelte';
+} from './Button';

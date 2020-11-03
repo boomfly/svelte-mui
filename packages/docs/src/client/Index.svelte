@@ -1,6 +1,10 @@
 <script lang='coffee'>
   import {getContext} from 'svelte'
-  import ThemeProvider from '@svelte-mui/core/src/js/styles/ThemeProvider'
+  #import ThemeProvider from '@svelte-mui/core/src/coffee/styles/ThemeProvider.svelte'
+  import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button} from '@svelte-mui/core'
+  #import Button from '@svelte-mui/core/src/coffee/Button/Button.svelte'
+
+  # console.log Button, ThemeProvider
 
   #import Box from '@svelte-mui/core/Box'
   #import Button from '@svelte-mui/core/Button'
@@ -15,7 +19,7 @@
     setItem: (name, value) -> value
   }
 
-  theme = storage.getItem('mui-theme') ? 'light'
+  theme = storage.getItem('mui-theme') ? 'dark'
 
   (`$:`) storage.setItem('mui-theme', theme)
 
@@ -40,7 +44,7 @@
 
 <ThemeProvider {theme} />
 
-<!-- <div class='root'>
+<div class='root'>
   <AppBar class='p2' color='default' position='static'>
     <Typography variant='h5'>Messages</Typography>
   </AppBar>
@@ -133,4 +137,4 @@
       {/each}
     </Grid>
   </div>
-</div> -->
+</div>

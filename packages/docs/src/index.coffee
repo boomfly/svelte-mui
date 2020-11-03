@@ -1,5 +1,5 @@
-require('source-map-support').install()
-import {WebApp} from '/server'
+# require('source-map-support').install()
+import {WebApp} from './server/index.coffee'
 import debug from 'debug'
 
 log = debug('svelte-mui:index')

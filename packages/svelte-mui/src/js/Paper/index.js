@@ -1,3 +1,3 @@
 export {
   default
-} from './Paper.svelte';
+} from './Paper';

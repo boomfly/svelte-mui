@@ -19,7 +19,7 @@
   "svelte": "./src/coffee/index.coffee",
   "scripts": {
     "start": "parcel --no-cache --public-url '/' --out-dir dist src/index.html",
-    "build": "npm run preprocess && npm run build:legacy && npm run build:modern && npm run build:node && npm run build:stable",
+    "build": "echo 'core builded'",
     "build:legacy": "node ../../scripts/build legacy",
     "build:modern": "node ../../scripts/build modern",
     "build:node": "node ../../scripts/build node",

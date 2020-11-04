@@ -18,12 +18,9 @@
   "main": "dist/node/index.js",
   "browser": "dist/browser/index.js",
   "scripts": {
-    "start": "parcel --no-cache --public-url '/' --out-dir dist src/index.html",
-    "build": "npm run docs:build",
-    "test:start": "parcel watch--no-cache --public-url '/' --out-dir dist/test src/index.html",
-    "lib:start": "parcel watch --out-dir dist/lib src/mui/index.coffee",
-    "lib:build-browser": "parcel build -t browser --no-cache --public-url '/' --out-dir dist/browser src/mui/index.coffee",
-    "lib:build-node": "TARGET=node parcel build -t browser --no-cache --public-url '/' --out-dir dist/node src/mui/index.coffee",
+    "start": "lerna run start --scope @svelte-mui/docs --stream",
+    "postinstall": "lerna bootstrap",
+    "build": "lerna run build",
     "docs:watch": "lerna run watch --scope @svelte-mui/docs --stream",
     "docs:build": "lerna run build --scope @svelte-mui/docs",
     "test": "echo \"Error: no test specified\" && exit 1"

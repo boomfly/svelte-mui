@@ -1,5 +1,5 @@
 <script lang='coffee'>
-  import {getContext} from 'svelte'
+  import {getContext, onMount} from 'svelte'
   #import ThemeProvider from '@svelte-mui/core/src/coffee/styles/ThemeProvider.svelte'
   import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button} from '@svelte-mui/core'
   #import Button from '@svelte-mui/core/src/coffee/Button/Button.svelte'
@@ -13,6 +13,12 @@
   #import AppBar from '@svelte-mui/core/AppBar'
   #import Typography from '@svelte-mui/core/Typography'
   #import FormLabel from '@svelte-mui/core/FormLabel'
+
+  onMount ->
+    document.documentElement.getElementById
+    cssStyles = document.getElementById('css-server-side')
+    if cssStyles and cssStyles.parentNode
+      cssStyles.parentNode.removeChild(cssStyles)
 
   storage = localStorage ? {
     getItem: (name) -> 'light'

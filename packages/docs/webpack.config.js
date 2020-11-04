@@ -6,7 +6,7 @@ const nodeExternals = require('webpack-node-externals')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const clientConfig = {
-  mode: 'none',
+  mode: 'production',
   entry: './src/client/index.coffee',
   output: {
     filename: 'index.js',
@@ -105,7 +105,7 @@ const clientConfig = {
 module.exports = [
   clientConfig,
   {
-    mode: 'none',
+    mode: 'production',
     entry: './src/index.coffee',
     output: {
       filename: 'index.js',

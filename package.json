@@ -41,8 +41,6 @@
     "lerna": "^3.22.1",
     "mini-css-extract-plugin": "^1.2.1",
     "nodemon": "^2.0.6",
-    "parcel": "^1.12.4",
-    "parcel-plugin-svelte": "^4.0.6",
     "raw-loader": "^4.0.2",
     "source-map-support": "^0.5.19",
     "style-loader": "^2.0.0",

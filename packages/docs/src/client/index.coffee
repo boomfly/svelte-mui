@@ -1,7 +1,7 @@
 import '@fortawesome/fontawesome-free/css/all.css'
 import './images/favicon.ico'
 
-import Index from './index.svelte'
+import Index from './Index.svelte'
 
 app = new Index {
   target: document.getElementById('app')

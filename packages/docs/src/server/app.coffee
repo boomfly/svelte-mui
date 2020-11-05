@@ -23,7 +23,7 @@ import authentication from './authentication.coffee'
 
 app = express feathers()
 
-import App from '../client/index.svelte'
+import App from '../client/Index.svelte'
 
 import indexTemplate from './templates/index.hbs'
 

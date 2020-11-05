@@ -12,6 +12,7 @@ client = {
   mode
   entry: './src/client/index.coffee'
   output:
+    uniqueName: 'client'
     filename: 'index.js'
     path: path.resolve(__dirname, 'dist/public')
   target: 'web',

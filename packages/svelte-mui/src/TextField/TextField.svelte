@@ -220,7 +220,6 @@
 <button
   {disabled}
   class:disabled
-  class:text={variant === 'text'}
   class='root {variant} {color} {$$props.class}'
   on:click={createRipple}
   on:click

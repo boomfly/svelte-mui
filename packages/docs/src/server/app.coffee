@@ -1,5 +1,6 @@
 import Handlebars from 'handlebars'
 import fs from 'fs'
+import cookie from 'cookie'
 
 import path from 'path'
 import favicon from 'serve-favicon'
@@ -54,12 +55,15 @@ app.configure channels
 
 indexHandler = (req, res, next) ->
   # res.sendFile "#{process.cwd()}/build/public/index.html"
-  {html, css} = App.render()
+  cookies = cookie.parse(req.headers.cookie ? '')
+  # console.log 'cookies', cookies
+  theme = cookies['mui-theme'] ? 'dark'
+  {html, css} = App.render({theme})
   
   result = template {
     content: html
     css: css.code
-    htmlAttributes: 'class="theme-dark"'
+    htmlAttributes: "theme='#{theme}'"
   }
   # console.log 'html', result, html
   # result = 'Hello world'

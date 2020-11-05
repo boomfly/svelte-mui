@@ -41,7 +41,7 @@
     result
   )
 
-  (`$:`) props = {class: "root #{classes} #{$$props.class}", style: "#{style} #{$$props.style}"}
+  (`$:`) props = {class: "root #{classes} #{$$props.class}", style: "#{style} #{$$props.style ? ''}"}
 </script>
 
 <style>

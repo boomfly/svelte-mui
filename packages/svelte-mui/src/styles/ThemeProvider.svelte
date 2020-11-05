@@ -1,15 +1,15 @@
 <script lang='coffee'>
   import {onMount, afterUpdate, setContext} from 'svelte'
-  import {writable} from 'svelte/store'
+  import {writable, get} from 'svelte/store'
   import Colors from './Colors.svelte'
   import {currentTheme} from './store.coffee'
 
-  export theme = 'light'
+  export theme = $currentTheme
 
   (`$:`) currentTheme.set(theme)
   (`$:`) (
     if document?
-      document.documentElement.className = "theme-#{theme}"
+      document.documentElement.setAttribute 'theme', theme
   )
 </script>
 
@@ -175,7 +175,7 @@
     --theme-shadows-24: 0px 11px 15px -7px rgba(0,0,0,var(--theme-shadows-key-umbra-opacity)),0px 24px 38px 3px rgba(0,0,0,var(--theme-shadows-key-penumbra-opacity)),0px 9px 46px 8px rgba(0,0,0,var(--theme-shadows-ambient-shadow-opacity));
   }
 
-  :global(html.theme-light) {
+  :global(html[theme=light]) {
     /* text */
     --theme-palette-text-primary: rgba(0, 0, 0, 0.87);
     --theme-palette-text-secondary: rgba(0, 0, 0, 0.54);
@@ -204,7 +204,7 @@
     --theme-palette-action-activated-opacity: 0.12;
   }
 
-  :global(html.theme-dark) {
+  :global(html[theme=dark]) {
     /* palette */
     /* --theme-palette-primary-main: #303030;
     --theme-palette-primary-contrast-text: white; */

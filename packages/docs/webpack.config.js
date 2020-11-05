@@ -4,9 +4,10 @@ const webpack = require('webpack')
 const sveltePreprocess = require('svelte-preprocess')
 const nodeExternals = require('webpack-node-externals')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const Manifest = require('webpack-manifest-plugin')
 
 const clientConfig = {
-  mode: 'production',
+  mode: 'none',
   entry: './src/client/index.coffee',
   output: {
     filename: 'index.js',
@@ -17,7 +18,7 @@ const clientConfig = {
   //   allowlist: ['@svelte-mui/core']
   // })],
   resolve: {
-    extensions: ['.mjs', '.js', '.coffee', '.svelte', '.css'],
+    extensions: ['.svelte', '.mjs', '.js', '.coffee', '.css'],
     mainFields: ['svelte', 'module', 'browser', 'main']
   },
   module: {
@@ -65,7 +66,8 @@ const clientConfig = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: ''
+              publicPath: '',
+              name: 'index.css'
             }
           },
           {
@@ -80,7 +82,7 @@ const clientConfig = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|gif|ico)$/,
         use: [
           'file-loader',
         ],
@@ -98,21 +100,25 @@ const clientConfig = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'index.css',
-    })
+    }),
+    new Manifest({
+      publicPath: ''
+    }),
   ]
 }
 
 module.exports = [
   clientConfig,
   {
-    mode: 'production',
+    mode: 'none',
     entry: './src/index.coffee',
     output: {
       filename: 'index.js',
     },
     target: 'node',
     externals: [nodeExternals({
-      allowlist: ['@svelte-mui/core']
+      allowlist: ['@svelte-mui/core'],
+      modulesDir: '../../node_modules'
     })],
     resolve: {
       extensions: ['.mjs', '.js', '.coffee', '.svelte'],

@@ -23,12 +23,6 @@ import authentication from './authentication.coffee'
 
 app = express feathers()
 
-import App from '../client/Index.svelte'
-
-import indexTemplate from './templates/index.hbs'
-
-template = Handlebars.compile(indexTemplate)
-
 # Load app configuration
 app.configure configuration()
 # Enable CORS, security, compression, favicon and body parsing
@@ -52,40 +46,6 @@ app.configure authentication
 app.configure services
 # Set up event channels (see channels.js)
 app.configure channels
-
-indexHandler = (req, res, next) ->
-  # res.sendFile "#{process.cwd()}/build/public/index.html"
-  faviconLink = ''
-  try
-    manifest = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'public/manifest.json')))
-    faviconLink = """
-    <link rel="shortcut icon" type="image/x-icon" href="#{manifest['favicon.ico']}" />
-    """
-  catch e
-    console.log 'Cannot load manifest'
-
-  cookies = cookie.parse(req.headers.cookie ? '')
-  # console.log 'cookies', cookies
-  theme = cookies['mui-theme'] ? 'dark'
-  {html, css} = App.render({theme})
-
-  head = """
-  #{faviconLink}
-  """
-  
-  result = template {
-    head
-    content: html
-    css: css.code
-    htmlAttributes: "theme='#{theme}'"
-  }
-  # console.log 'html', result, html
-  # result = 'Hello world'
-  res.send result
-
-# app.get '/', indexHandler
-app.get '*', indexHandler
-
 
 # Configure a middleware for 404s and the error handler
 app.use express.notFound()

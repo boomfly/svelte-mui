@@ -1,5 +1,3 @@
-export {currentTheme, ThemeProvider} from './styles'
-
 export {default as Typography} from './Typography'
 # export * from './Typography'
 
@@ -20,3 +18,6 @@ export {default as FormLabel} from './FormLabel'
 
 export {default as AppBar} from './AppBar'
 # export * from './AppBar'
+
+
+export {currentTheme, ThemeProvider} from './styles'

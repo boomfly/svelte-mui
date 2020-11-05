@@ -2,6 +2,7 @@
   export variant = 'text'
   export color = 'inherit'
   export disabled = false
+  export fullWidth = false
 
   (`$:`) style = (
     result = ''
@@ -216,11 +217,16 @@
       opacity: 0;
     }
   }
+
+  .full-width {
+    width: 100%;
+  }
 </style>
 
 <button
   {disabled}
   class:disabled
+  class:full-width={fullWidth}
   class='root {variant} {color} {$$props.class}'
   on:click={createRipple}
   on:click

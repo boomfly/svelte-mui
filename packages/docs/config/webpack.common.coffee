@@ -2,6 +2,7 @@ path = require('path')
 fs = require('fs')
 webpack = require('webpack')
 sveltePreprocess = require('svelte-preprocess')
+{mdsvex} = require 'mdsvex'
 nodeExternals = require('webpack-node-externals')
 MiniCssExtractPlugin = require('mini-css-extract-plugin')
 Manifest = require('webpack-manifest-plugin')
@@ -21,7 +22,7 @@ client = {
   #   allowlist: ['@svelte-mui/core']
   # })],
   resolve:
-    extensions: ['.svelte', '.mjs', '.js', '.coffee', '.css']
+    extensions: ['.svelte', '.mjs', '.js', '.coffee', '.css', '.md']
     mainFields: ['svelte', 'module', 'browser', 'main']
   module: {
     rules: [
@@ -50,6 +51,16 @@ client = {
           options:
             hydratable: true
             preprocess: sveltePreprocess()
+      }
+      {
+        test: /\.(md)$/
+        use:
+          loader: 'svelte-loader'
+          options:
+            hydratable: true
+            preprocess: mdsvex {
+              extensions: ['.md']
+            }
       }
       {
         test: /\.css$/
@@ -134,6 +145,17 @@ server = {
             generate: 'ssr'
             hydratable: true
             preprocess: sveltePreprocess()
+      }
+      {
+        test: /\.(md)$/
+        use:
+          loader: 'svelte-loader'
+          options:
+            generate: 'ssr'
+            hydratable: true
+            preprocess: mdsvex {
+              extensions: ['.md']
+            }
       }
       {
         test: /\.hbs$/

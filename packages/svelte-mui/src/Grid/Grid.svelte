@@ -30,6 +30,7 @@
         else
           result += "--size-#{key}: #{value}; --max-#{key}: none;"
         lastValue = value
+      #console.log 'style', result
 
     if container
       result += "--spacing: #{spacing};"
@@ -40,9 +41,13 @@
 </script>
 
 <style>
-  /* .root {
-    
-  } */
+  .grid {
+    --size-xs: none;
+    --size-sm: none;
+    --size-md: none;
+    --size-lg: none;
+    --size-xl: none;
+  }
   .container {
     --margin: calc(var(--theme-spacing, 0) * var(--spacing, 0));
 
@@ -72,7 +77,7 @@
 
   /* xs */
   @media (max-width: 600px) {
-    .root.item {
+    .grid.item {
       --size: var(--size-xs, 0);
       --grow: var(--grow-xs, 0);
       --max: var(--max-xs, none);
@@ -81,12 +86,12 @@
 
   /* sm */
   /* @media (min-width: 600px) and (max-width: 960px) {
-    .root {
+    .grid {
       --size: var(--size-sm, 0);
     }
   } */
   @media (min-width: 600px) {
-    .root.item {
+    .grid.item {
       --size: var(--size-sm, 0);
       --grow: var(--grow-sm, 0);
       --max: var(--max-sm, none);
@@ -95,7 +100,7 @@
 
   /* md */
   @media (min-width: 960px) and (max-width: 1280px) {
-    .root.item {
+    .grid.item {
       --size: var(--size-md, 0);
       --grow: var(--grow-md, 0);
       --max: var(--max-md, none);
@@ -104,7 +109,7 @@
 
   /* lg */
   @media (min-width: 1280px) and (max-width: 1920px) {
-    .root.item {
+    .grid.item {
       --size: var(--size-lg, 0);
       --grow: var(--grow-lg, 0);
       --max: var(--max-lg, none);
@@ -113,7 +118,7 @@
 
   /* xl */
   @media (min-width: 1920px) {
-    .root.item {
+    .grid.item {
       --size: var(--size-xl, 0);
       --grow: var(--grow-xl, 0);
       --max: var(--max-xl, none);
@@ -125,7 +130,7 @@
   class:container
   class:item
   class:zeroMinWidth
-  class="root {$$props.class || ''}"
+  class="grid {$$props.class || ''}"
   style="{style} {$$props.style || ''}"
 >
   <slot />

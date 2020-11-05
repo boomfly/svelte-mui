@@ -19,7 +19,7 @@
   "browser": "dist/browser/index.js",
   "scripts": {
     "start": "DEBUG=svelte-mui:* DEBUG_COLORS=true node dist/index.js",
-    "build": "webpack --config config/webpack.development.coffee",
+    "build": "webpack --config config/webpack.production.coffee",
     "watch": "concurrently -n 'compile,runtime' 'npm:compile' 'npm:dev'",
     "compile": "webpack --watch --config config/webpack.development.coffee",
     "clean": "rm -rf dist/*",

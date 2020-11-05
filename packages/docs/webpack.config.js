@@ -6,8 +6,10 @@ const nodeExternals = require('webpack-node-externals')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const Manifest = require('webpack-manifest-plugin')
 
+const mode = 'production'
+
 const clientConfig = {
-  mode: 'none',
+  mode,
   entry: './src/client/index.coffee',
   output: {
     filename: 'index.js',
@@ -107,65 +109,67 @@ const clientConfig = {
   ]
 }
 
-module.exports = [
-  clientConfig,
-  {
-    mode: 'none',
-    entry: './src/index.coffee',
-    output: {
-      filename: 'index.js',
-    },
-    target: 'node',
-    externals: [nodeExternals({
-      allowlist: ['@svelte-mui/core'],
-      modulesDir: '../../node_modules'
-    })],
-    resolve: {
-      extensions: ['.mjs', '.js', '.coffee', '.svelte'],
-      mainFields: ['svelte', 'module', 'browser', 'main']
-    },
-    module: {
-      rules: [
-        {
-          test: /\.m?js/,
-          resolve: {
-            fullySpecified: false
-          }
-        },
-        {
-          test: /.(js)$/,
-          exclude: [path.resolve(__dirname, "node_modules")],
-          use: {
-            loader: "babel-loader",
-            options: {
-              presets: ['@babel/preset-env']
-            },
-          }
-        },
-        {
-          test: /\.coffee$/,
-          use: 'coffee-loader'
-        },
-        {
-          test: /\.(svelte)$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'svelte-loader',
-            options: {
-              generate: 'ssr',
-              hydratable: true,
-              preprocess: sveltePreprocess()
-            }
-          }
-        },
-        {
-          test: /\.hbs$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'raw-loader'
+const serverConfig = {
+  mode,
+  entry: './src/index.coffee',
+  output: {
+    filename: 'index.js',
+  },
+  target: 'node',
+  externals: [nodeExternals({
+    allowlist: ['@svelte-mui/core'],
+    modulesDir: '../../node_modules'
+  })],
+  resolve: {
+    extensions: ['.mjs', '.js', '.coffee', '.svelte'],
+    mainFields: ['svelte', 'module', 'browser', 'main']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false
+        }
+      },
+      {
+        test: /.(js)$/,
+        exclude: [path.resolve(__dirname, "node_modules")],
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env']
+          },
+        }
+      },
+      {
+        test: /\.coffee$/,
+        use: 'coffee-loader'
+      },
+      {
+        test: /\.(svelte)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'svelte-loader',
+          options: {
+            generate: 'ssr',
+            hydratable: true,
+            preprocess: sveltePreprocess()
           }
         }
-      ]
-    }
+      },
+      {
+        test: /\.hbs$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'raw-loader'
+        }
+      }
+    ]
   }
+}
+
+module.exports = [
+  clientConfig,
+  serverConfig
 ]

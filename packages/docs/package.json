@@ -19,9 +19,9 @@
   "browser": "dist/browser/index.js",
   "scripts": {
     "start": "DEBUG=svelte-mui:* DEBUG_COLORS=true node dist/index.js",
-    "build": "webpack",
+    "build": "webpack --config config/webpack.development.coffee",
     "watch": "concurrently -n 'compile,runtime' 'npm:compile' 'npm:dev'",
-    "compile": "webpack --watch",
+    "compile": "webpack --watch --config config/webpack.development.coffee",
     "clean": "rm -rf dist/*",
     "dev": "DEBUG=svelte-mui:* DEBUG_COLORS=true nodemon --ignore dist/public/ dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -55,12 +55,26 @@ app.configure channels
 
 indexHandler = (req, res, next) ->
   # res.sendFile "#{process.cwd()}/build/public/index.html"
+  faviconLink = ''
+  try
+    manifest = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'public/manifest.json')))
+    faviconLink = """
+    <link rel="shortcut icon" type="image/x-icon" href="#{manifest['favicon.ico']}" />
+    """
+  catch e
+    console.log 'Cannot load manifest'
+
   cookies = cookie.parse(req.headers.cookie ? '')
   # console.log 'cookies', cookies
   theme = cookies['mui-theme'] ? 'dark'
   {html, css} = App.render({theme})
+
+  head = """
+  #{faviconLink}
+  """
   
   result = template {
+    head
     content: html
     css: css.code
     htmlAttributes: "theme='#{theme}'"

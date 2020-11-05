@@ -6,12 +6,12 @@ nodeExternals = require('webpack-node-externals')
 MiniCssExtractPlugin = require('mini-css-extract-plugin')
 Manifest = require('webpack-manifest-plugin')
 
-mode = 'production'
+mode = 'none'
 
 client = {
   mode
   entry: {
-    './src/client/index.coffee'
+    index: './src/client/index.coffee'
   }
   output:
     filename: 'index.js'

@@ -10,11 +10,12 @@ mode = 'production'
 
 client = {
   mode
-  entry: './src/client/index.coffee'
+  entry: {
+    './src/client/index.coffee'
+  }
   output:
-    uniqueName: 'client'
     filename: 'index.js'
-    path: path.resolve(__dirname, 'dist/public')
+    path: path.resolve(process.cwd(), 'dist/public')
   target: 'web',
   # externals: [nodeExternals({
   #   allowlist: ['@svelte-mui/core']
@@ -31,7 +32,7 @@ client = {
       }
       {
         test: /.(js)$/
-        exclude: [path.resolve(__dirname, "node_modules")]
+        exclude: [path.resolve(process.cwd(), "node_modules")]
         use:
           loader: "babel-loader"
           options:

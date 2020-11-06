@@ -41,7 +41,7 @@
 </script>
 
 <style>
-  .grid {
+  .grid-root {
     --size-xs: none;
     --size-sm: none;
     --size-md: none;
@@ -77,7 +77,7 @@
 
   /* xs */
   @media (max-width: 600px) {
-    .grid.item {
+    .item {
       --size: var(--size-xs, 0);
       --grow: var(--grow-xs, 0);
       --max: var(--max-xs, none);
@@ -86,12 +86,12 @@
 
   /* sm */
   /* @media (min-width: 600px) and (max-width: 960px) {
-    .grid {
+     {
       --size: var(--size-sm, 0);
     }
   } */
   @media (min-width: 600px) {
-    .grid.item {
+    .item {
       --size: var(--size-sm, 0);
       --grow: var(--grow-sm, 0);
       --max: var(--max-sm, none);
@@ -100,7 +100,7 @@
 
   /* md */
   @media (min-width: 960px) and (max-width: 1280px) {
-    .grid.item {
+    .item {
       --size: var(--size-md, 0);
       --grow: var(--grow-md, 0);
       --max: var(--max-md, none);
@@ -109,7 +109,7 @@
 
   /* lg */
   @media (min-width: 1280px) and (max-width: 1920px) {
-    .grid.item {
+    .item {
       --size: var(--size-lg, 0);
       --grow: var(--grow-lg, 0);
       --max: var(--max-lg, none);
@@ -118,7 +118,7 @@
 
   /* xl */
   @media (min-width: 1920px) {
-    .grid.item {
+    .item {
       --size: var(--size-xl, 0);
       --grow: var(--grow-xl, 0);
       --max: var(--max-xl, none);
@@ -130,7 +130,7 @@
   class:container
   class:item
   class:zeroMinWidth
-  class="grid {$$props.class || ''}"
+  class="grid-root {$$props.class || ''}"
   style="{style} {$$props.style || ''}"
 >
   <slot />

@@ -187,8 +187,10 @@
     --theme-palette-divider: rgba(0, 0, 0, 0.12);
 
     /* background */
-    --theme-palette-background-paper: var(--theme-colors-common-white);
-    --theme-palette-background-default: var(--theme-colors-grey-50);
+    /* --theme-palette-background-paper: var(--theme-colors-common-white);
+    --theme-palette-background-default: var(--theme-colors-grey-50); */
+    --theme-palette-background-paper: var(--theme-colors-grey-50);
+    --theme-palette-background-default: var(--theme-colors-common-white);
 
     /* action */
     --theme-palette-action-active: rgba(0, 0, 0, 0.54);

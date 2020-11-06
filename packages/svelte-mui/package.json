@@ -15,6 +15,7 @@
   "keywords": [],
   "author": "Ivan Chalyk <boomfly@rambler.ru>",
   "license": "MIT",
+  "main": "./src/index.coffee",
   "svelte": "./src/index.coffee",
   "scripts": {
     "start": "parcel --no-cache --public-url '/' --out-dir dist src/index.html",

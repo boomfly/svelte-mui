@@ -15,6 +15,8 @@
     --theme-palette-background-appbar: var(--theme-colors-grey-900);
   }
   .root {
+    --theme-z-index-appbar: 1100;
+    
     display: flex;
     flex-direction: column;
     width: 100%;

@@ -12,7 +12,7 @@
 </script>
 
 <style>
-  .root {
+  .paper-root {
     --shadow: var(--theme-shadow-0);
 
     background-color: var(--theme-palette-background-paper);
@@ -31,7 +31,7 @@
 
 <div
   class:rounded={!square}
-  class='root {variant} {$$props.class || ''}'
+  class='paper-root {variant} {$$props.class || ''}'
   style='{style}{$$props.style || ''}'
 >
   <slot />

@@ -1,5 +1,6 @@
 <script lang='coffee'>
   import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button, currentTheme} from '@svelte-mui/core'
+  import Example from '../../components/Example.svelte'
   spacing = 2
   radios = []
   for i in [0..12]
@@ -7,23 +8,19 @@
 </script>
 
 <style>
-  .example :global(.background) {
-    background-color: var(--theme-palette-background-level2);
-    padding: calc(var(--theme-spacing) * 3);
-  }
-  .example :global(.paper) {
+  div :global(.paper) {
     height: 140px;
     width: 100px;
   }
 </style>
 
-<div class='example'>
-  <Paper class='background' elevation={1}>
+<div>
+  <Example>
     <Box mt={1}>
       <Grid container spacing={spacing} justify='center' style='justify-content: center'>
         {#each [1,2,3] as paper}
           <Grid item>
-            <Paper variant='outlined' elevation={24} class='p2 paper'>
+            <Paper class='paper'>
               
             </Paper>
           </Grid>
@@ -48,5 +45,5 @@
         </Grid>
       </Paper>
     </Box>
-  </Paper>
+  </Example>
 </div>

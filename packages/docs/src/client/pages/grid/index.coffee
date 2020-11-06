@@ -1,1 +1,1 @@
-export {default} from './grid.md'
+export {default} from './Grid.md'

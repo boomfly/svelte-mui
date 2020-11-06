@@ -57,9 +57,9 @@ client = {
         use:
           loader: 'svelte-loader'
           options:
+            extensions: ['.md']
             hydratable: true
             preprocess: mdsvex {
-              extensions: ['.md']
             }
       }
       {
@@ -115,7 +115,7 @@ server = {
     }
   ]
   resolve:
-    extensions: ['.mjs', '.js', '.coffee', '.svelte']
+    extensions: ['.mjs', '.js', '.coffee', '.svelte', '.md']
     mainFields: ['svelte', 'module', 'browser', 'main']
   module:
     rules: [
@@ -151,10 +151,11 @@ server = {
         use:
           loader: 'svelte-loader'
           options:
+            extensions: ['.md']
             generate: 'ssr'
             hydratable: true
             preprocess: mdsvex {
-              extensions: ['.md']
+              
             }
       }
       {

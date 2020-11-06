@@ -2,7 +2,7 @@
   import {getContext, onMount} from 'svelte'
   #import ThemeProvider from '@svelte-mui/core/src/coffee/styles/ThemeProvider.svelte'
   import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button, currentTheme} from '@svelte-mui/core'
-  import GridPage from './pages/grid'
+  import GridPage from './pages/grid/index.coffee'
   import Cookie from 'js-cookie'
   #import Button from '@svelte-mui/core/src/coffee/Button/Button.svelte'
 

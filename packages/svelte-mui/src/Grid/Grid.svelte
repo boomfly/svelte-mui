@@ -11,11 +11,13 @@
   export spacing = 0
 
   sizes = {xs, sm, md, lg, xl}
-  
-  (`$:`) style = (
-    # return '' unless elementStyle
+  element = null
+
+  (`$:`) itemStyles = (->
     result = ''
-    if item
+    unless item
+      result
+    else
       lastValue = null
       for key, value of sizes
         if not value
@@ -30,14 +32,17 @@
         else
           result += "--size-#{key}: #{value}; --max-#{key}: none;"
         lastValue = value
-      #console.log 'style', result
+      result
+  )()
 
-    if container
-      result += "--spacing: #{spacing};"
-    #console.log 'style', result
+  (`$:`) containerStyles = (->
+    return '' unless container
+    result = ''
+    result += "--spacing: #{spacing};"
     result
-  )
-  
+  )()
+
+  (`$:`) style = containerStyles + itemStyles
 </script>
 
 <style>
@@ -127,11 +132,12 @@
 </style>
 
 <div
+  bind:this={element}
   class:container
   class:item
   class:zeroMinWidth
   class="grid-root {$$props.class || ''}"
-  style="{style} {$$props.style || ''}"
+  style="{style}{$$props.style || ''}"
 >
   <slot />
 </div>

@@ -227,7 +227,7 @@
   {disabled}
   class:disabled
   class:full-width={fullWidth}
-  class='root {variant} {color} {$$props.class}'
+  class='root {variant} {color} {$$props.class || ''}'
   on:click={createRipple}
   on:click
 >

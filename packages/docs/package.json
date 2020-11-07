@@ -53,6 +53,7 @@
     "nedb": "^1.8.0",
     "serve-favicon": "^2.5.0",
     "source-map-support": "^0.5.19",
+    "svelte-routing": "^1.4.2",
     "utf-8-validate": "^5.0.3"
   }
 }

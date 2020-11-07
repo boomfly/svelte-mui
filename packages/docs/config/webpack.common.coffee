@@ -51,7 +51,7 @@ client = {
       }
       {
         test: /\.(svelte)$/
-        exclude: /node_modules/
+        # exclude: /node_modules/
         use:
           loader: 'svelte-loader'
           options:
@@ -151,7 +151,7 @@ server = {
       }
       {
         test: /\.(svelte)$/
-        exclude: /node_modules/
+        # exclude: /node_modules/
         use:
           loader: 'svelte-loader'
           options:

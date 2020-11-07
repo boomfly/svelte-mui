@@ -1,5 +1,6 @@
 <script lang='coffee'>
   import {getContext, onMount} from 'svelte'
+  import {Router, Route, link} from 'svelte-routing'
   #import ThemeProvider from '@svelte-mui/core/src/coffee/styles/ThemeProvider.svelte'
   import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button, currentTheme} from '@svelte-mui/core'
   import GridPage from './pages/grid/index.coffee'
@@ -15,7 +16,10 @@
   #import AppBar from '@svelte-mui/core/AppBar'
   #import Typography from '@svelte-mui/core/Typography'
   #import FormLabel from '@svelte-mui/core/FormLabel'
+
+  export url = ''
   
+  console.log url
 
   onMount ->
     document.documentElement.getElementById
@@ -67,6 +71,9 @@
     padding-left: calc(var(--theme-spacing) * 2);
     padding-right: calc(var(--theme-spacing) * 2);
   }
+  .main-content a {
+    color: var(--theme-palette-primary-main);
+  }
 </style>
 
 <ThemeProvider {theme} />
@@ -79,7 +86,23 @@
   <div class='main-content'>
     <Grid container style='justify-content: center'>
       <Grid item xs={12} md={8}>
-        <GridPage />
+        <a href='/' use:link>Home</a>
+        <a href='/components/grid' use:link>Grid Component</a>
+        <a href='/not-found' use:link>Not Found</a>
+      </Grid>
+    </Grid>
+    
+    <Grid container style='justify-content: center'>
+      <Grid item xs={12} md={8}>
+        <Router {url}>
+          <Route path='components/grid' component={GridPage} />
+          <Route path='/'>
+            Home Page
+          </Route>
+          <Route path=''>
+            Not Found
+          </Route>
+        </Router>
       </Grid>
     </Grid>
 

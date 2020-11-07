@@ -17,10 +17,12 @@ export default (app) ->
     catch e
       console.log 'Cannot load manifest'
 
+    # console.log req.url
+
     cookies = cookie.parse(req.headers.cookie ? '')
     # console.log 'cookies', cookies
     theme = cookies['mui-theme'] ? 'dark'
-    {html, css} = App.render({theme})
+    {html, css} = App.render({theme, url: req.url})
 
     head = ''
     

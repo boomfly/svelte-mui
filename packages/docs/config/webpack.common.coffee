@@ -71,7 +71,6 @@ client = {
             loader: MiniCssExtractPlugin.loader
             options:
               publicPath: ''
-              name: 'index.css'
           }
           {
             loader: 'css-loader'

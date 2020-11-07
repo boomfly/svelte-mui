@@ -45,9 +45,9 @@ client = {
         test: /\.coffee$/
         use:
           loader: 'coffee-loader'
-          options:
-            transpile:
-              presets: ['@babel/env']
+          # options:
+          #   transpile:
+          #     presets: ['@babel/env']
       }
       {
         test: /\.(svelte)$/
@@ -145,9 +145,9 @@ server = {
         test: /\.coffee$/
         use:
           loader: 'coffee-loader'
-          options:
-            transpile:
-              presets: ['@babel/env']
+          # options:
+          #   transpile:
+          #     presets: ['@babel/env']
       }
       {
         test: /\.(svelte)$/

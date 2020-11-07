@@ -8,6 +8,7 @@ MiniCssExtractPlugin = require('mini-css-extract-plugin')
 Manifest = require('webpack-manifest-plugin')
 
 mode = 'none'
+extensions = ['.svelte', '.mjs', '.js', '.coffee', '.md']
 
 client = {
   mode
@@ -21,9 +22,10 @@ client = {
   # externals: [nodeExternals({
   #   allowlist: ['@svelte-mui/core']
   # })],
-  resolve:
-    extensions: ['.svelte', '.mjs', '.js', '.coffee', '.css', '.md']
+  resolve: {
+    extensions
     mainFields: ['svelte', 'module', 'browser', 'main']
+  }
   module: {
     rules: [
       {
@@ -114,9 +116,10 @@ server = {
       modulesDir: '../../node_modules'
     }
   ]
-  resolve:
-    extensions: ['.mjs', '.js', '.coffee', '.svelte', '.md']
+  resolve: {
+    extensions: [...extensions, '.hbs']
     mainFields: ['svelte', 'module', 'browser', 'main']
+  }
   module:
     rules: [
       {

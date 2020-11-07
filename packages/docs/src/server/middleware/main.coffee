@@ -2,7 +2,7 @@ import fs from 'fs'
 import cookie from 'cookie'
 import path from 'path'
 import Handlebars from 'handlebars'
-import App from '../../client/Index.svelte'
+import App from '/src/client/App.svelte'
 import indexTemplate from '../templates/index.hbs'
 
 template = Handlebars.compile(indexTemplate)

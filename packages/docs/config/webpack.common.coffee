@@ -60,9 +60,12 @@ client = {
           loader: 'svelte-loader'
           options:
             hydratable: true
-            preprocess: mdsvex {
-              extensions: ['.md']
-            }
+            preprocess: [
+              sveltePreprocess()
+              mdsvex {
+                extensions: ['.md']
+              }
+            ]
       }
       {
         test: /\.css$/
@@ -155,9 +158,12 @@ server = {
           options:
             generate: 'ssr'
             hydratable: true
-            preprocess: mdsvex {
-              extensions: ['.md']
-            }
+            preprocess: [
+              sveltePreprocess()
+              mdsvex {
+                extensions: ['.md']
+              }
+            ]
       }
       {
         test: /\.hbs$/

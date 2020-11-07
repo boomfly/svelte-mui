@@ -43,7 +43,11 @@ client = {
       }
       {
         test: /\.coffee$/
-        use: 'coffee-loader'
+        use:
+          loader: 'coffee-loader'
+          options:
+            transpile:
+              presets: ['@babel/env']
       }
       {
         test: /\.(svelte)$/
@@ -61,10 +65,10 @@ client = {
           options:
             hydratable: true
             preprocess: [
-              sveltePreprocess()
               mdsvex {
                 extensions: ['.md']
               }
+              sveltePreprocess()
             ]
       }
       {
@@ -139,7 +143,11 @@ server = {
       }
       {
         test: /\.coffee$/
-        use: 'coffee-loader'
+        use:
+          loader: 'coffee-loader'
+          options:
+            transpile:
+              presets: ['@babel/env']
       }
       {
         test: /\.(svelte)$/
@@ -159,10 +167,10 @@ server = {
             generate: 'ssr'
             hydratable: true
             preprocess: [
-              sveltePreprocess()
               mdsvex {
                 extensions: ['.md']
               }
+              sveltePreprocess()
             ]
       }
       {

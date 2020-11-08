@@ -3,7 +3,8 @@
   import {Router, Route, link} from 'svelte-routing'
   #import ThemeProvider from '@svelte-mui/core/src/coffee/styles/ThemeProvider.svelte'
   import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button, currentTheme} from '@svelte-mui/core'
-  import GridPage from './pages/grid/index.coffee'
+  import GridPage from './pages/grid'
+  import ButtonPage from './pages/button'
   import Cookie from 'js-cookie'
   #import Button from '@svelte-mui/core/src/coffee/Button/Button.svelte'
 
@@ -86,6 +87,7 @@
       <Grid item xs={12} md={8}>
         <a href='/' use:link>Home</a>
         <a href='/components/grid' use:link>Grid Component</a>
+        <a href='/components/button' use:link>Button Component</a>
         <a href='/not-found' use:link>Not Found</a>
       </Grid>
     </Grid>
@@ -93,6 +95,7 @@
     <Grid container style='justify-content: center'>
       <Grid item xs={12} md={8}>
         <Router {url}>
+          <Route path='components/button' component={ButtonPage} />
           <Route path='components/grid' component={GridPage} />
           <Route path='/'>
             Home Page

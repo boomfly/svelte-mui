@@ -8,6 +8,7 @@
   }
 </style>
 
+
 # Grid
 
 ### The Material Design responsive layout grid adapts to screen size and orientation, ensuring consistency across layouts.

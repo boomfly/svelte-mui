@@ -3,6 +3,7 @@
   import {Router, Route, link} from 'svelte-routing'
   #import ThemeProvider from '@svelte-mui/core/src/coffee/styles/ThemeProvider.svelte'
   import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button, currentTheme} from '@svelte-mui/core'
+  import NotFound from './pages/NotFound.svelte'
   import GridPage from './pages/grid'
   import ButtonPage from './pages/button'
   import Cookie from 'js-cookie'
@@ -19,6 +20,7 @@
   #import FormLabel from '@svelte-mui/core/FormLabel'
 
   export url = ''
+  export staticContext = null
 
   onMount ->
     document.documentElement.getElementById
@@ -101,7 +103,7 @@
             Home Page
           </Route>
           <Route path=''>
-            Not Found
+            <NotFound {staticContext} />
           </Route>
         </Router>
       </Grid>

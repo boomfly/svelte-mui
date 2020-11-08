@@ -2,9 +2,7 @@
   
 </script>
 <style>
-  a {
-    color: var(--theme-palette-primary-main);
-  }
+  
 </style>
 
 

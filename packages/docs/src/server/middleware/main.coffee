@@ -22,7 +22,8 @@ export default (app) ->
     cookies = cookie.parse(req.headers.cookie ? '')
     # console.log 'cookies', cookies
     theme = cookies['mui-theme'] ? 'dark'
-    {html, css} = App.render({theme, url: req.url})
+    staticContext = {}
+    {html, css} = App.render({theme, url: req.url, staticContext})
 
     head = ''
     
@@ -34,4 +35,6 @@ export default (app) ->
     }
     # console.log 'html', result, html
     # result = 'Hello world'
+    if staticContext.statusCode is 404
+      res.status 404
     res.send result

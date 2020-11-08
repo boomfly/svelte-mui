@@ -35,7 +35,7 @@ client = {
       }
       {
         test: /.(js)$/
-        exclude: [path.resolve(process.cwd(), "node_modules")]
+        # exclude: [path.resolve(process.cwd(), "node_modules")]
         use:
           loader: "babel-loader"
           options:
@@ -50,16 +50,7 @@ client = {
           #     presets: ['@babel/env']
       }
       {
-        test: /\.(svelte)$/
-        # exclude: /node_modules/
-        use:
-          loader: 'svelte-loader'
-          options:
-            hydratable: true
-            preprocess: sveltePreprocess()
-      }
-      {
-        test: /\.(md)$/
+        test: /\.(svelte|svx|md)$/
         use:
           loader: 'svelte-loader'
           options:
@@ -118,7 +109,7 @@ server = {
   target: 'node',
   externals: [
     nodeExternals {
-      allowlist: ['@svelte-mui/core']
+      allowlist: ['@svelte-mui/core', 'svelte-routing']
       modulesDir: '../../node_modules'
     }
   ]
@@ -135,7 +126,7 @@ server = {
       }
       {
         test: /.(js)$/
-        exclude: [path.resolve(__dirname, "node_modules")]
+        # exclude: [path.resolve(__dirname, "node_modules")]
         use:
           loader: "babel-loader"
           options:
@@ -150,17 +141,7 @@ server = {
           #     presets: ['@babel/env']
       }
       {
-        test: /\.(svelte)$/
-        # exclude: /node_modules/
-        use:
-          loader: 'svelte-loader'
-          options:
-            generate: 'ssr'
-            hydratable: true
-            preprocess: sveltePreprocess()
-      }
-      {
-        test: /\.(md)$/
+        test: /\.(svelte|svx|md)$/
         use:
           loader: 'svelte-loader'
           options:

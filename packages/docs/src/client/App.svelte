@@ -18,8 +18,6 @@
   #import FormLabel from '@svelte-mui/core/FormLabel'
 
   export url = ''
-  
-  console.log url
 
   onMount ->
     document.documentElement.getElementById

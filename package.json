@@ -23,6 +23,7 @@
     "build": "lerna run build",
     "docs:watch": "lerna run watch --scope @svelte-mui/docs --stream",
     "docs:build": "lerna run build --scope @svelte-mui/docs --stream",
+    "lib:preprocess": "lerna run preprocess --scope @svelte-mui/core --stream",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@svelte-mui/core",
-  "version": "0.0.1-beta1",
+  "version": "0.0.1-beta2",
   "description": "Svelte Material Design Components",
   "repository": {
     "type": "git",
@@ -24,11 +24,15 @@
     "lib:start": "parcel watch --no-cache --public-url '/' --out-dir dist/lib src/mui/index.coffee",
     "lib:build-browser": "parcel build -t browser --no-cache --public-url '/' --out-dir dist/browser src/coffee/index.coffee",
     "lib:build-node": "TARGET=node parcel build -t browser --no-cache --public-url '/' --out-dir dist/node src/mui/index.coffee",
-    "preprocess": "coffee ./scripts/preprocess.coffee",
+    "preprocess": "coffee ./scripts/compile.coffee",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.4",
     "svelte": "^3.24.1"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false
 }

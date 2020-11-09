@@ -1,2 +1,2 @@
-export {currentTheme} from './store.coffee'
+export {currentTheme} from './store'
 export {default as ThemeProvider} from './ThemeProvider.svelte'

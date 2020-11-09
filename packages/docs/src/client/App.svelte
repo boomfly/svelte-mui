@@ -1,3 +1,15 @@
+<script lang='coffee' context='module'>
+  import {register} from 'svelte-loadable'
+  ButtonLoader = register {
+    loader: -> import('./pages/button')
+    resolve: -> './pages/button'
+  }
+  GridLoader = register {
+    loader: -> import('./pages/grid')
+    resolve: -> './pages/grid'
+  }
+</script>
+
 <script lang='coffee'>
   import {getContext, onMount} from 'svelte'
   import {Router, Route, link} from 'svelte-routing'
@@ -128,10 +140,10 @@
       <Grid item xs={12} md={8} style='position: relative;'>
         <Router {url}>
           <AnimatedRoute path='components/button'>
-            <Loadable loader={() => import('./pages/button')} />
+            <Loadable loader='{ButtonLoader}' />
           </AnimatedRoute>
           <AnimatedRoute path='components/grid'>
-            <Loadable loader={() => import('./pages/grid')} />
+            <Loadable loader='{GridLoader}' />
           </AnimatedRoute>
           <AnimatedRoute path='/'>
             Home Page

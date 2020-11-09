@@ -7,7 +7,10 @@
   .animated-route-root {
     width: 100%;
     position: absolute;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
+    padding-bottom: calc(var(--theme-spacing) * 2);
+    /* padding-left: 5px;
+    padding-right: 5px; */
   }
 </style>
 

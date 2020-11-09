@@ -4,8 +4,11 @@ import path from 'path'
 import Handlebars from 'handlebars'
 import App from '/src/client/App.svelte'
 import indexTemplate from '../templates/index.hbs'
+import {preloadAll} from 'svelte-loadable'
 
 template = Handlebars.compile(indexTemplate)
+
+preloadAll()
 
 export default (app) ->
   app.get '*', (req, res, next) ->

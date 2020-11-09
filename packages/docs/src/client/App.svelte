@@ -101,7 +101,7 @@
     </Grid>
     
     <Grid container style='justify-content: center'>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={8} style='position: relative'>
         <Router {url}>
           <Route path='components/button' component={ButtonPage} />
           <Route path='components/grid' component={GridPage} />

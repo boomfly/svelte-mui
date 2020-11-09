@@ -1,1 +1,1 @@
-export {default} from './Route.svelte'
+export {default} from './Grid.md'

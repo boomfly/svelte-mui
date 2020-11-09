@@ -1,12 +1,16 @@
 <script lang='coffee'>
   import {getContext, onMount} from 'svelte'
   import {Router, Route, link} from 'svelte-routing'
+  import AnimatedRoute from './components/AnimatedRoute.svelte'
   #import ThemeProvider from '@svelte-mui/core/src/coffee/styles/ThemeProvider.svelte'
   import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button, Overlay, currentTheme} from '@svelte-mui/core'
   import NotFound from './pages/NotFound.svelte'
-  import GridPage from './pages/grid'
-  import ButtonPage from './pages/button'
   import Cookie from 'js-cookie'
+  import PrismLight from '!raw-loader!prismjs/themes/prism.css'
+  import PrismDark from '!raw-loader!prismjs/themes/prism-okaidia.css'
+
+  import Loadable from 'svelte-loadable'
+
   #import Button from '@svelte-mui/core/src/coffee/Button/Button.svelte'
 
   # console.log Button, ThemeProvider
@@ -22,6 +26,8 @@
   export url = ''
   export staticContext = null
   overlayActive = true
+  test =
+    css: '.string {color: white;}'
 
   toggleOverlay = ->
     overlayActive = false
@@ -37,11 +43,19 @@
     setItem: (name, value) -> value
   }
 
-  # export theme = storage.getItem('mui-theme') ? 'dark'
   export theme = $currentTheme
+  (`$:`) (
+    theme = $currentTheme
+  )
 
-  # (`$:`) storage.setItem('mui-theme', theme)
-  (`$:`) theme = $currentTheme
+  prismStyleEl = null
+  (`$:`) (
+    if prismStyleEl
+      if theme is 'light'
+        prismStyleEl.innerHTML = PrismLight
+      else
+        prismStyleEl.innerHTML = PrismDark
+  )
 
   spacing = 2
 
@@ -56,6 +70,12 @@
     else
       theme = 'light'
     Cookie.set('mui-theme', theme)
+
+  if window?
+    window.addEventListener 'popstate', (e) ->
+      console.log e
+    window.addEventListener 'pushstate', (e) ->
+      console.log e
     
 </script>
 
@@ -81,6 +101,10 @@
   }
 </style>
 
+<svelte:head>
+  <style bind:this={prismStyleEl} id='prism' />
+</svelte:head>
+
 <ThemeProvider {theme} />
 
 <div class='root'>
@@ -101,16 +125,20 @@
     </Grid>
     
     <Grid container style='justify-content: center'>
-      <Grid item xs={12} md={8} style='position: relative'>
+      <Grid item xs={12} md={8} style='position: relative;'>
         <Router {url}>
-          <Route path='components/button' component={ButtonPage} />
-          <Route path='components/grid' component={GridPage} />
-          <Route path='/'>
+          <AnimatedRoute path='components/button'>
+            <Loadable loader={() => import('./pages/button')} />
+          </AnimatedRoute>
+          <AnimatedRoute path='components/grid'>
+            <Loadable loader={() => import('./pages/grid')} />
+          </AnimatedRoute>
+          <AnimatedRoute path='/'>
             Home Page
-          </Route>
-          <Route path=''>
+          </AnimatedRoute>
+          <AnimatedRoute path=''>
             <NotFound {staticContext} />
-          </Route>
+          </AnimatedRoute>
         </Router>
       </Grid>
     </Grid>

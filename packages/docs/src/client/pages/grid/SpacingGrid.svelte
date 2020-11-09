@@ -1,6 +1,6 @@
 <script lang='coffee'>
   import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button, currentTheme} from '@svelte-mui/core'
-  import Example from '../../components/Example.svelte'
+  import Example from '/src/client/components/Example.svelte'
   spacing = 2
   radios = []
   for i in [0..12]

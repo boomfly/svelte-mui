@@ -1,5 +1,6 @@
 <script lang='coffee'>
-  import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button, currentTheme} from '@svelte-mui/core'
+  import {Grid, Box, Paper} from '@svelte-mui/core'
+  import Example from '/src/client/components/Example.svelte'
 </script>
 
 <style>
@@ -17,32 +18,34 @@
 </style>
 
 <div class='example'>
-  <Paper class='background' square elevation={1}>
-    <Box mt={1}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Paper class='paper'>xs=12</Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper class='paper'>xs=6</Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper class='paper'>xs=6</Paper>
-        </Grid>
+  <Example>
+    <Paper class='background' square elevation={1}>
+      <Box mt={1}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Paper class='paper'>xs=12</Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper class='paper'>xs=6</Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper class='paper'>xs=6</Paper>
+          </Grid>
 
-        <Grid item xs={3}>
-          <Paper class='paper'>xs=3</Paper>
+          <Grid item xs={3}>
+            <Paper class='paper'>xs=3</Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper class='paper'>xs=3</Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper class='paper'>xs=3</Paper>
+          </Grid>
+          <Grid item xs={3}>
+            <Paper class='paper'>xs=3</Paper>
+          </Grid>
         </Grid>
-        <Grid item xs={3}>
-          <Paper class='paper'>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper class='paper'>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper class='paper'>xs=3</Paper>
-        </Grid>
-      </Grid>
-    </Box>
-  </Paper>
+      </Box>
+    </Paper>
+  </Example>
 </div>

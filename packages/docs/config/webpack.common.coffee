@@ -109,7 +109,7 @@ server = {
   target: 'node',
   externals: [
     nodeExternals {
-      allowlist: ['@svelte-mui/core', 'svelte-routing']
+      allowlist: ['@svelte-mui/core', 'svelte-routing', 'svelte-loadable']
       modulesDir: '../../node_modules'
     }
   ]

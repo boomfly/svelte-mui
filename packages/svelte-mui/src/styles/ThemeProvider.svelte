@@ -16,7 +16,7 @@
 <Colors />
 
 <style>
-  :global(:root) {
+  :global([theme]) {
     /* shape */
     --theme-shape-border-radius: 4px;
 
@@ -175,7 +175,7 @@
     --theme-shadows-24: 0px 11px 15px -7px rgba(0,0,0,var(--theme-shadows-key-umbra-opacity)),0px 24px 38px 3px rgba(0,0,0,var(--theme-shadows-key-penumbra-opacity)),0px 9px 46px 8px rgba(0,0,0,var(--theme-shadows-ambient-shadow-opacity));
   }
 
-  :global(html[theme=light]) {
+  :global([theme=light]) {
     /* text */
     --theme-palette-text-primary: rgba(0, 0, 0, 0.87);
     --theme-palette-text-secondary: rgba(0, 0, 0, 0.54);
@@ -206,7 +206,7 @@
     --theme-palette-action-activated-opacity: 0.12;
   }
 
-  :global(html[theme=dark]) {
+  :global([theme=dark]) {
     /* palette */
     /* --theme-palette-primary-main: #303030;
     --theme-palette-primary-contrast-text: white; */

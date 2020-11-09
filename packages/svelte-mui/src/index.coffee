@@ -19,5 +19,7 @@ export {default as FormLabel} from './FormLabel'
 export {default as AppBar} from './AppBar'
 # export * from './AppBar'
 
+export {default as Overlay} from './Overlay'
+
 
 export {currentTheme, ThemeProvider} from './styles'

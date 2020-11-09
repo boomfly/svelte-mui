@@ -8,10 +8,10 @@
 </script>
 
 <style>
-  :global(html[theme=light]) {
+  :global([theme=light]) {
     --theme-palette-background-appbar: var(--theme-colors-grey-100);
   }
-  :global(html[theme=dark]) {
+  :global([theme=dark]) {
     --theme-palette-background-appbar: var(--theme-colors-grey-900);
   }
   .root {
@@ -82,6 +82,7 @@
     square
     elevation={1}
     class="paper color-{color} {$$props.class || ''}"
+    style="{$$props.style || ''}"
   >
     <slot />
   </Paper>

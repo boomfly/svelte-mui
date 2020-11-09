@@ -2,7 +2,7 @@
   import {getContext, onMount} from 'svelte'
   import {Router, Route, link} from 'svelte-routing'
   #import ThemeProvider from '@svelte-mui/core/src/coffee/styles/ThemeProvider.svelte'
-  import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button, currentTheme} from '@svelte-mui/core'
+  import {ThemeProvider, AppBar, Grid, Box, Paper, Typography, FormLabel, Button, Overlay, currentTheme} from '@svelte-mui/core'
   import NotFound from './pages/NotFound.svelte'
   import GridPage from './pages/grid'
   import ButtonPage from './pages/button'
@@ -21,6 +21,10 @@
 
   export url = ''
   export staticContext = null
+  overlayActive = true
+
+  toggleOverlay = ->
+    overlayActive = false
 
   onMount ->
     document.documentElement.getElementById
@@ -56,11 +60,11 @@
 </script>
 
 <style>
-  :global(html[theme=light]) {
+  :global([theme=light]) {
     --theme-palette-background-level1: #fff;
     --theme-palette-background-level2: var(--theme-colors-grey-100);
   }
-  :global(html[theme=dark]) {
+  :global([theme=dark]) {
     --theme-palette-background-level1: var(--theme-colors-grey-900);
     --theme-palette-background-level2: #333;
   }
@@ -80,11 +84,13 @@
 <ThemeProvider {theme} />
 
 <div class='root'>
-  <AppBar class='p2' color='default' position='fixed'>
-    <Typography variant='h5'>Messages</Typography>
+  <AppBar class='p2' color='default' position='fixed' style='display: flex;'>
+    <Typography variant='h5' style='flex-grow: 1'>Messages</Typography>
+    <Button on:click={toggleTheme} variant='contained' disabled={false}>Toggle Theme</Button>
   </AppBar>
 
   <div class='main-content'>
+
     <Grid container style='justify-content: center'>
       <Grid item xs={12} md={8}>
         <a href='/' use:link>Home</a>
@@ -109,96 +115,7 @@
       </Grid>
     </Grid>
 
-    <Paper class='p2' elevation={5}>
-      <Button on:click={toggleTheme} variant='contained' disabled={false}>Toggle Theme</Button>
-    </Paper>
+    <!-- <Overlay active={overlayActive} on:click={toggleOverlay} absolute /> -->
 
-    <Paper class='p2 mt2'>
-      <Grid container spacing={1}>
-        <Grid item xs>
-          <Button variant='contained' fullWidth>
-            <i slot='start-icon' class='fas fa-users fa-fw'></i>
-            Default
-            <i slot='end-icon' class='fas fa-home fa-fw'></i>
-          </Button>
-        </Grid>
-        <Grid item xs>
-          <Button variant='contained' color='primary' fullWidth>Primary</Button>
-        </Grid>
-        <Grid item>
-          <Button variant='contained' color='secondary'>Secondary</Button>
-        </Grid>
-        <Grid item>
-          <Button variant='contained' disabled>Disabled</Button>
-        </Grid>
-      </Grid>
-    </Paper>
-
-    <Paper class='p2 mt2'>
-      <Button variant='outlined'>
-        <i slot='start-icon' class='fas fa-users fa-fw'></i>
-        Default
-        <i slot='end-icon' class='fas fa-home fa-fw'></i>
-      </Button>
-      <Button variant='outlined' color='primary'>Primary</Button>
-      <Button variant='outlined' color='secondary'>Secondary</Button>
-      <Button variant='outlined' disabled>Disabled</Button>
-    </Paper>
-
-    <Paper class='p2 mt2'>
-      <Button variant='text'>Default</Button>
-      <Button variant='text' color='primary'>Primary</Button>
-      <Button variant='text' color='secondary'>Secondary</Button>
-      <Button variant='text' disabled>Disabled</Button>
-    </Paper>
-
-    <br />
-    <br />
-
-    <FormLabel for='test' required>Hello From Label</FormLabel>
-    <textarea id='test' />
-    
-    <div class='p1'>
-      <Grid container spacing={spacing} justify='center'>
-        <Grid item xs={3}>
-          <Paper variant='outlined' elevation={24} class='p2'>
-            
-          </Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper variant='outlined' class='p2'>
-            
-          </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper variant='elevation' class='p2'>
-            
-          </Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper variant='elevation' class='p2'>
-            
-          </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper variant='elevation' class='p2'>
-            
-          </Paper>
-        </Grid>
-      </Grid>
-    </div>
-
-    <div class='p1'>
-      <Grid container spacing={2}>
-        {#each radios as radio}
-          <Grid item>
-            <label style='display: inline-flex; align-items: center'>
-              <input type='radio' bind:group={spacing} value={radio.value} style='margin: 0; margin-right: 4px' />
-              {radio.label}
-            </label>
-          </Grid>
-        {/each}
-      </Grid>
-    </div>
   </div>
 </div>

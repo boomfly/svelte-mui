@@ -19,33 +19,31 @@
 
 <div class='example'>
   <Example>
-    <Paper class='background' square elevation={1}>
-      <Box mt={1}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Paper class='paper'>xs=12</Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <Paper class='paper'>xs=6</Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <Paper class='paper'>xs=6</Paper>
-          </Grid>
-
-          <Grid item xs={3}>
-            <Paper class='paper'>xs=3</Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper class='paper'>xs=3</Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper class='paper'>xs=3</Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper class='paper'>xs=3</Paper>
-          </Grid>
+    <Box mt={1}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Paper class='paper'>xs=12</Paper>
         </Grid>
-      </Box>
-    </Paper>
+        <Grid item xs={6}>
+          <Paper class='paper'>xs=6</Paper>
+        </Grid>
+        <Grid item xs={6}>
+          <Paper class='paper'>xs=6</Paper>
+        </Grid>
+
+        <Grid item xs={3}>
+          <Paper class='paper'>xs=3</Paper>
+        </Grid>
+        <Grid item xs={3}>
+          <Paper class='paper'>xs=3</Paper>
+        </Grid>
+        <Grid item xs={3}>
+          <Paper class='paper'>xs=3</Paper>
+        </Grid>
+        <Grid item xs={3}>
+          <Paper class='paper'>xs=3</Paper>
+        </Grid>
+      </Grid>
+    </Box>
   </Example>
 </div>

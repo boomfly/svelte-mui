@@ -8,6 +8,10 @@
     loader: -> import('./pages/grid')
     resolve: -> './pages/grid'
   }
+  TextFieldLoader = register {
+    loader: -> import('./pages/text-field')
+    resolve: -> './pages/text-field'
+  }
 </script>
 
 <script lang='coffee'>
@@ -132,6 +136,7 @@
         <a href='/' use:link>Home</a>
         <a href='/components/grid' use:link>Grid Component</a>
         <a href='/components/button' use:link>Button Component</a>
+        <a href='/components/text-field' use:link>TextField Component</a>
         <a href='/not-found' use:link>Not Found</a>
       </Grid>
     </Grid>
@@ -144,6 +149,9 @@
           </AnimatedRoute>
           <AnimatedRoute path='components/grid'>
             <Loadable loader='{GridLoader}' />
+          </AnimatedRoute>
+          <AnimatedRoute path='components/text-field'>
+            <Loadable loader='{TextFieldLoader}' />
           </AnimatedRoute>
           <AnimatedRoute path='/'>
             Home Page

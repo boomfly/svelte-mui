@@ -1,237 +1,213 @@
-<script lang='coffeescript'>
-  export variant = 'text'
-  export color = 'inherit'
+<script lang='coffee'>
+  export variant = 'standard'
+  export color = 'primary'
   export disabled = false
+  export autofocus = false
+  export autocomplete = false
+  export fullWidth = false
+  export id = null
+  export label = null
+  export multiline = false
+  export value = null
+  export maxLines = 999
+  export disableUnderline = false
+
+  inputEl = null
+  height = null
+  offset = null
+  rows = null
+  maxAllowedHeight = null
+  focused = false
+
+  getStyleValue = (computedStyle, property) -> parseInt(computedStyle[property], 10) ? 0
+
+  syncHeight = (value) ->
+    return unless inputEl
+
+    newHeight = 0
+    hasGrow = false
+    if inputEl.scrollHeight - offset > maxAllowedHeight
+      inputEl.style.overflowY = 'scroll'
+      newHeight = maxAllowedHeight
+    else
+      inputEl.style.overflowY = 'hidden'
+      inputEl.style.height = 'auto'
+      newHeight = inputEl.scrollHeight - offset
+      hasGrow = true
+    inputEl.style.height = "#{newHeight}px"
+
+  onInit = (ref) ->
+    return unless ref
+    computedStyle = window.getComputedStyle ref
+    offset = getStyleValue(computedStyle, 'padding-bottom') + getStyleValue(computedStyle, 'padding-top')
+    rows = ref.rows ? 1
+    lineHeight = (ref.scrollHeight / rows) - (offset / rows)
+    maxAllowedHeight = (ref.scrollHeight * maxLines) - offset
+
+  (`$:`) onInit inputEl
 
   (`$:`) style = (
     result = ''
+    if height
+      result += "height: #{height};"
+    result
   )
 
-  createRipple = (event) ->
-    button = event.currentTarget
-    circle = document.createElement('span')
-    diameter = Math.max(button.clientWidth, button.clientHeight)
-    radius = diameter / 2
-    circle.style.width = circle.style.height = "#{diameter}px"
-    #circle.style.left = "#{event.clientX - (button.offsetLeft + radius)}px"
-    #circle.style.top = "#{event.clientY - (button.offsetTop + radius)}px"
-    circle.style.left = "#{event.offsetX - radius}px"
-    circle.style.top = "#{event.offsetY - radius}px"
-    circle.classList.add('ripple')
+  onInput = (e) ->
+    console.log e.target.value
+    value = e.target.value
+    if multiline
+      syncHeight()
 
-    ripple = button.getElementsByClassName('ripple')[0]
-    if ripple
-      ripple.remove()
-    button.appendChild(circle)
+  onFocus = (e) ->
+    focused = true
+
+  onBlur = (e) ->
+    focused = false
 </script>
 
+<div
+  {disabled}
+  class:disabled
+  class:focused
+  class:fullWidth
+  class:underline={!disableUnderline}
+  class='text-field-root {variant} {color} {$$props.class}'
+>
+  <span class='start adornment'>
+    <slot name='start-adornment'></slot>
+  </span>
+    
+  {#if label}
+    {label}
+  {/if}
+  {#if multiline}
+    <!-- svelte-ignore a11y-autofocus -->
+    <textarea
+      bind:this={inputEl}
+      class='input'
+      class:multiline
+      autofocus={autofocus}
+      bind:value
+      on:input={onInput}
+      rows='1'
+      on:focus={onFocus}
+      on:blur={onBlur}
+      {style}
+    />
+  {:else}
+    <!-- svelte-ignore a11y-autofocus -->
+    <input
+      bind:this={inputEl}
+      class='input'
+      autofocus={autofocus}
+      bind:value
+      on:focus={onFocus}
+      on:blur={onBlur}
+    />
+  {/if}
+
+  <span class='end adornment'>
+    <slot name='end-adornment'></slot>
+  </span>
+  <span class='ripple'></span>
+</div>
+
 <style>
-  .root {
+  .text-field-root {
     --color: inherit;
 
     overflow: hidden;
 
+    font-family: var(--theme-typography-body1-font-family);
+    font-weight: var(--theme-typography-body1-font-weight);
+    font-size: var(--theme-typography-body1-font-size);
+    line-height: var(--theme-typography-body1-line-height);
+    letter-spacing: var(--theme-typography-body1-letter-spacing);
+    text-transform: var(--theme-typography-body1-text-transform);
+
+    line-height: 1.4375em;
+    box-sizing: border-box;
+    position: relative;
+    cursor: text;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-    background-color: transparent; /* Reset default value */
-    /* We disable the focus ring for mouse, touch and keyboard users. */
-    outline: 0;
-    border: 0;
-    margin: 0; /* Remove the margin in Safari */
-    border-radius: 0;
-    padding: 0; /* Remove the padding in Firefox */
-    cursor: pointer;
-    user-select: none;
-    vertical-align: middle;
-    -moz-appearance: none; /* Reset */
-    -webkit-appearance: none; /* Reset */
-    text-decoration: none;
-    /* So we take precedent over the style of a native <a /> element. */
-    color: var(--color);
-  
-    font-family: var(--theme-typography-button-font-family);
-    font-weight: var(--theme-typography-button-font-weight);
-    font-size: var(--theme-typography-button-font-size);
-    line-height: var(--theme-typography-button-line-height);
-    letter-spacing: var(--theme-typography-button-letter-spacing);
-    text-transform: var(--theme-typography-button-text-transform);
-
-    min-width: 64px;
-    padding: 6px 16px;
-    border-radius: var(--theme-shape-border-radius);
-
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
 
-  .root:hover {
-    text-decoration: none;
-  }
-
-  .root:hover:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: var(--theme-palette-text-primary);
-    opacity: var(--theme-palette-action-hover-opacity);
-  }
-
-  .label {
+  .fullWidth {
     width: 100%;
-    display: inherit;
-    align-items: inherit;
-    justify-content: inherit;
-  }
-
-  .text {
-    padding: 6px 8px;
-  }
-
-  .text.primary {
-    --color: var(--theme-palette-primary-main);
-  }
-
-  .text.primary:hover:after, .outlined.primary:hover:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: var(--theme-palette-primary-main);
-    opacity: var(--theme-palette-action-hover-opacity);
-  }
-
-  .text.secondary {
-    --color: var(--theme-palette-secondary-main);
-  }
-
-  .text.secondary:hover:after, .outlined.secondary:hover:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: var(--theme-palette-secondary-main);
-    opacity: var(--theme-palette-action-hover-opacity);
-  }
-
-  .outlined {
-    --color: var(--theme-palette-text-primary);
-    padding: 5px 15px;
-    border: 1px solid var(--color);
-  }
-
-  .outlined.disabled {
-    border: 1px solid var(--theme-palette-action-disabled-background);
-  }
-
-  .outlined.primary {
-    --color: var(--theme-palette-primary-main);
-    border: 1px solid var(--theme-palette-primary-main);
-  }
-
-  .outlined.secondary {
-    --color: var(--theme-palette-secondary-main);
-    border: 1px solid var(--theme-palette-secondary-main);
-  }
-
-  .contained {
-    --color: var(--theme-colors-common-black);
-    background-color: var(--theme-colors-grey-300);
-    box-shadow: var(--theme-shadows-2);
-  }
-
-  .contained:hover {
-    background-color: var(--theme-colors-grey-A100);
-    box-shadow: var(--theme-shadows-4);
-  }
-
-  .contained:active {
-    box-shadow: var(--theme-shadows-8);
-  }
-
-  .contained.primary {
-    --color: var(--theme-palette-primary-contrast-text);
-    background-color: var(--theme-palette-primary-main);
-  }
-
-  .contained.primary:hover {
-    background-color: var(--theme-palette-primary-dark);
-  }
-
-  .contained.secondary {
-    --color: var(--theme-palette-secondary-contrast-text);
-    background-color: var(--theme-palette-secondary-main);
-  }
-
-  .contained.secondary:hover {
-    background-color: var(--theme-palette-secondary-dark);
-  }
-
-  .contained.disabled {
-    --color: var(--theme-palette-action-disabled);
-    background-color: var(--theme-palette-action-disabled-background);
-    box-shadow: var(--theme-shadows-0);
   }
 
   .disabled {
-    --color: var(--theme-palette-action-disabled);
+    color: var(--theme-palette-text-disabled);
+    cursor: default;
   }
 
-  .root.inherit {
-    /* color: inherit; */
-    border-color: inherit;
+  .label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(0, 24px) scale(1);
   }
 
-  .root .icon.start {
-    margin-right: calc(var(--theme-spacing) * 1);
+  .label.shrink {
+    transform: translate(0, 1.5px) scale(0.75);
+    transform-origin: top left;
   }
 
-  .root .icon.end {
-    margin-left: calc(var(--theme-spacing) * 1);
+  .input {
+    font: inherit;
+    letter-spacing: inherit;
+    color: currentColor;
+    padding: 4px 0 5px;
+    border: 0;
+    box-sizing: content-box;
+    background: none;
+    height: 1.4375em;
+    margin: 0;
+    display: block;
+    min-width: 0;
+    width: 100%;
   }
 
-  .root :global(.ripple) {
-    position: absolute; /* The absolute position we mentioned earlier */
-    border-radius: 50%;
-    transform: scale(0);
-    animation: ripple 600ms linear;
-    /* background-color: var(--theme-palette-action-disabled-background); */
-    background-color: var(--color);
-    opacity: 0.3;
+  .input:focus {
+    outline: 0;
   }
 
-  @keyframes ripple {
-    to {
-      transform: scale(4);
-      opacity: 0;
-    }
+  .input.multiline {
+    height: auto;
+    resize: none;
+    padding: 0;
+  }
+
+  .underline:after {
+    border-bottom: 2px solid var(--theme-palette-primary-main);
+    left: 0;
+    bottom: 0;
+    content: '';
+    position: absolute;
+    right: 0;
+    transform: scaleX(0);
+    transition: transform 0.2s cubic-bezier(0.0, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .underline:before {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    left: 0;
+    bottom: 0;
+    content: '\00a0';
+    position: absolute;
+    right: 0;
+    transition: border-bottom-color 0.2s;
+    pointer-events: none;
+  }
+
+  .underline:hover:not(.disabled):before {
+    border-bottom: 2px solid var(--theme-palette-text-primary);
+  }
+
+  .focused.underline:after {
+    transform: scaleX(1);
   }
 </style>
-
-<button
-  {disabled}
-  class:disabled
-  class='root {variant} {color} {$$props.class}'
-  on:click={createRipple}
-  on:click
->
-  <span class='start icon'>
-    <slot name='start-icon'></slot>
-  </span>
-  <span class='label'>
-    <slot></slot>
-  </span>
-  <span class='end icon'>
-    <slot name='end-icon'></slot>
-  </span>
-  <span class='ripple'></span>
-</button>

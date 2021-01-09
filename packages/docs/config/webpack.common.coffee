@@ -5,7 +5,9 @@ sveltePreprocess = require('svelte-preprocess')
 {mdsvex} = require 'mdsvex'
 nodeExternals = require('webpack-node-externals')
 MiniCssExtractPlugin = require('mini-css-extract-plugin')
-{Manifest} = require('webpack-manifest-plugin')
+{Manifest} = _manifest = require('webpack-manifest-plugin')
+
+console.log 'manifest', Manifest, _manifest
 
 mode = 'none'
 extensions = ['.svelte', '.mjs', '.js', '.coffee', '.md']

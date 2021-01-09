@@ -19,7 +19,7 @@
   "browser": "dist/browser/index.js",
   "scripts": {
     "start": "lerna run start --scope @svelte-mui/docs --stream",
-    "postinstall": "lerna bootstrap",
+    "postinstall": "lerna bootstrap && lerna link",
     "build": "lerna run build",
     "docs:watch": "lerna run watch --scope @svelte-mui/docs --stream",
     "docs:build": "lerna run build --scope @svelte-mui/docs --stream",

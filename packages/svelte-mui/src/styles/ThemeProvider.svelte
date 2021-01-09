@@ -307,4 +307,9 @@
   :global(.ml8) {margin-left: calc(var(--theme-spacing) * 8)}
   :global(.ml9) {margin-left: calc(var(--theme-spacing) * 9)}
   :global(.ml10) {margin-left: calc(var(--theme-spacing) * 10)}
+
+  :global(.s-ripple-container) {
+    position: relative;
+    overflow: hidden;
+  }
 </style>

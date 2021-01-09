@@ -43,6 +43,7 @@
     "mdsvex": "^0.8.8",
     "mini-css-extract-plugin": "^1.2.1",
     "nodemon": "^2.0.6",
+    "prismjs": "^1.22.0",
     "raw-loader": "^4.0.2",
     "source-map-support": "^0.5.19",
     "style-loader": "^2.0.0",

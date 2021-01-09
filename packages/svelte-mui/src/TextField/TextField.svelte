@@ -6,6 +6,7 @@
   export autocomplete = false
   export fullWidth = false
   export id = null
+  export type = 'text'
   export label = null
   export multiline = false
   export value = null
@@ -54,7 +55,6 @@
   )
 
   onInput = (e) ->
-    console.log e.target.value
     value = e.target.value
     if multiline
       syncHeight()
@@ -84,10 +84,12 @@
   {#if multiline}
     <!-- svelte-ignore a11y-autofocus -->
     <textarea
+      {id}
       bind:this={inputEl}
       class='input'
       class:multiline
-      autofocus={autofocus}
+      {autofocus}
+      {autocomplete}
       bind:value
       on:input={onInput}
       rows='1'
@@ -98,10 +100,13 @@
   {:else}
     <!-- svelte-ignore a11y-autofocus -->
     <input
+      {id}
+      {type}
       bind:this={inputEl}
       class='input'
-      autofocus={autofocus}
-      bind:value
+      {autofocus}
+      {autocomplete}
+      on:input={onInput}
       on:focus={onFocus}
       on:blur={onBlur}
     />
@@ -110,7 +115,6 @@
   <span class='end adornment'>
     <slot name='end-adornment'></slot>
   </span>
-  <span class='ripple'></span>
 </div>
 
 <style>

@@ -1,217 +1,401 @@
-<script lang='coffee'>
-  export variant = 'standard'
-  export color = 'primary'
-  export disabled = false
-  export autofocus = false
-  export autocomplete = false
-  export fullWidth = false
-  export id = null
-  export type = 'text'
-  export label = null
-  export multiline = false
-  export value = null
-  export maxLines = 999
-  export disableUnderline = false
+<script>
+  import Input from '../Input';
+  import Icon from '../Icon';
+  import uid from '../internal/uid';
+  import clearIcon from '../internal/Icons/close';
 
-  inputEl = null
-  height = null
-  offset = null
-  rows = null
-  maxAllowedHeight = null
-  focused = false
+  let klass = '';
+  export { klass as class };
+  export let value = '';
+  export let color = 'primary';
+  export let filled = false;
+  export let solo = false;
+  export let outlined = false;
+  export let flat = false;
+  export let dense = false;
+  export let rounded = false;
+  export let clearable = false;
+  export let readonly = false;
+  export let disabled = false;
+  export let placeholder = null;
+  export let hint = '';
+  export let counter = false;
+  export let messages = [];
+  export let rules = [];
+  export let errorCount = 1;
+  export let validateOnBlur = false;
+  export let error = false;
+  export let success = false;
+  export let id = `s-input-${uid(5)}`;
+  export let style = null;
 
-  getStyleValue = (computedStyle, property) -> parseInt(computedStyle[property], 10) ? 0
+  let focused = false;
+  $: labelActive = !!placeholder || value || focused;
+  let errorMessages = [];
 
-  syncHeight = (value) ->
-    return unless inputEl
+  function checkRules() {
+    errorMessages = rules.map((r) => r(value)).filter((r) => typeof r === 'string');
+    if (errorMessages.length) error = true;
+    else {
+      error = false;
+    }
+  }
 
-    newHeight = 0
-    hasGrow = false
-    if inputEl.scrollHeight - offset > maxAllowedHeight
-      inputEl.style.overflowY = 'scroll'
-      newHeight = maxAllowedHeight
-    else
-      inputEl.style.overflowY = 'hidden'
-      inputEl.style.height = 'auto'
-      newHeight = inputEl.scrollHeight - offset
-      hasGrow = true
-    inputEl.style.height = "#{newHeight}px"
+  function onFocus() {
+    focused = true;
+  }
 
-  onInit = (ref) ->
-    return unless ref
-    computedStyle = window.getComputedStyle ref
-    offset = getStyleValue(computedStyle, 'padding-bottom') + getStyleValue(computedStyle, 'padding-top')
-    rows = ref.rows ? 1
-    lineHeight = (ref.scrollHeight / rows) - (offset / rows)
-    maxAllowedHeight = (ref.scrollHeight * maxLines) - offset
+  function onBlur() {
+    focused = false;
+    if (validateOnBlur) checkRules();
+  }
 
-  (`$:`) onInit inputEl
+  function clear() {
+    value = '';
+  }
 
-  (`$:`) style = (
-    result = ''
-    if height
-      result += "height: #{height};"
-    result
-  )
-
-  onInput = (e) ->
-    value = e.target.value
-    if multiline
-      syncHeight()
-
-  onFocus = (e) ->
-    focused = true
-
-  onBlur = (e) ->
-    focused = false
+  function onInput() {
+    if (!validateOnBlur) checkRules();
+  }
 </script>
 
-<div
+<Input
+  class="s-text-field {klass}"
+  {color}
+  {dense}
+  {readonly}
   {disabled}
-  class:disabled
-  class:focused
-  class:fullWidth
-  class:underline={!disableUnderline}
-  class='text-field-root {variant} {color} {$$props.class}'
->
-  <span class='start adornment'>
-    <slot name='start-adornment'></slot>
-  </span>
-    
-  {#if label}
-    {label}
-  {/if}
-  {#if multiline}
-    <!-- svelte-ignore a11y-autofocus -->
-    <textarea
-      {id}
-      bind:this={inputEl}
-      class='input'
-      class:multiline
-      {autofocus}
-      {autocomplete}
-      bind:value
-      on:input={onInput}
-      rows='1'
-      on:focus={onFocus}
-      on:blur={onBlur}
-      {style}
-    />
-  {:else}
-    <!-- svelte-ignore a11y-autofocus -->
-    <input
-      {id}
-      {type}
-      bind:this={inputEl}
-      class='input'
-      {autofocus}
-      {autocomplete}
-      on:input={onInput}
-      on:focus={onFocus}
-      on:blur={onBlur}
-    />
-  {/if}
+  {error}
+  {success}
+  {style}>
+  <!-- Slot for prepend outside the input. -->
+  <slot slot="prepend-outer" name="prepend-outer" />
+  <div
+    class="s-text-field__wrapper"
+    class:filled
+    class:solo
+    class:outlined
+    class:flat
+    class:rounded>
+    <!-- Slot for prepend inside the input. -->
+    <slot name="prepend" />
 
-  <span class='end adornment'>
-    <slot name='end-adornment'></slot>
-  </span>
-</div>
+    <div class="s-text-field__input">
+      <label for={id} class:active={labelActive}>
+        <slot />
+      </label>
+      <slot name="content" />
+      <input
+        type="text"
+        bind:value
+        {placeholder}
+        {id}
+        {readonly}
+        {disabled}
+        on:focus={onFocus}
+        on:blur={onBlur}
+        on:input={onInput}
+        on:focus
+        on:blur
+        on:input
+        on:change
+        on:keypress
+        {...$$restProps} />
+    </div>
 
-<style>
-  .text-field-root {
-    --color: inherit;
+    {#if clearable && value !== ''}
+      <div on:click={clear} style="cursor:pointer">
+        <!-- Slot for the icon when `clearable` is true. -->
+        <slot name="clear-icon">
+          <Icon path={clearIcon} />
+        </slot>
+      </div>
+    {/if}
 
-    overflow: hidden;
+    <!-- Slot for append inside the input. -->
+    <slot name="append" />
+  </div>
 
-    font-family: var(--theme-typography-body1-font-family);
-    font-weight: var(--theme-typography-body1-font-weight);
-    font-size: var(--theme-typography-body1-font-size);
-    line-height: var(--theme-typography-body1-line-height);
-    letter-spacing: var(--theme-typography-body1-letter-spacing);
-    text-transform: var(--theme-typography-body1-text-transform);
+  <div slot="messages">
+    <div>
+      <span>{hint}</span>
+      {#each messages as message}<span>{message}</span>{/each}
+      {#each errorMessages.slice(0, errorCount) as message}<span>{message}</span>{/each}
+    </div>
+    {#if counter}<span>{value.length} / {counter}</span>{/if}
+  </div>
 
-    line-height: 1.4375em;
-    box-sizing: border-box;
-    position: relative;
-    cursor: text;
-    display: inline-flex;
+  <!-- Slot for append outside the input. -->
+  <slot slot="append-outer" name="append-outer" />
+</Input>
+
+<style lang='scss'>
+  $text-field-line-height: 20px !default;
+  $text-field-label-top: 6px !default;
+  $text-field-prepend-append-margin: 8px !default;
+  $text-field-label-active-transform: translateY(-18px) scale(0.75) !default;
+  $text-field-padding: 8px 0 8px !default;
+  $text-field-dense-padding: 4px 0 2px !default;
+  $text-field-border-radius: var(--theme-shape-border-radius) !default;
+  $text-field-rounded-border-radius: 28px !default;
+  $text-field-wrapper-padding: 0 1px 0 12px;
+  $text-field-filled-outlined-min-height: 56px !default;
+  $text-field-filled-outlined-dense-min-height: 40px !default;
+
+  // Outlined
+  $text-field-outlined-label-top: 18px !default;
+  $text-field-outlined-label-active-transform: translateY(-24px) scale(0.75) !default;
+  $text-field-outlined-dense-label-top: 10px !default;
+  $text-field-outlined-dense-label-active-transform: translateY(-16px) scale(0.75) !default;
+  $text-field-outlined-rounded-padding: 0 24px !default;
+
+  // Solo
+  $text-field-solo-depth: 2 !default;
+  $text-field-solo-min-height: 48px !default;
+  $text-field-solo-dense-min-height: 40px !default;
+
+  // Filled
+  $text-field-filled-label-top: 20px !default;
+  $text-field-filled-label-active-transform: translateY(-10px) scale(0.75) !default;
+  $text-field-filled-dense-label-top: 12px !default;
+  $text-field-filled-dense-label-active-transform: translateY(-8px) scale(0.75) !default;
+  $text-field-filled-border-radius: $text-field-border-radius $text-field-border-radius 0 0 !default;
+  $text-field-filled-margin-top: 22px !default;
+
+  .s-text-field__input {
+    display: flex;
+    flex-grow: 1;
+
+    label {
+      position: absolute;
+      max-width: 90%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      top: $text-field-label-top;
+      pointer-events: none;
+      transform-origin: top left;
+
+      &.active {
+        max-width: 133%;
+        transform: $text-field-label-active-transform;
+      }
+    }
+
+    input {
+      caret-color: inherit;
+      flex: 1 1 auto;
+      line-height: $text-field-line-height;
+      padding: $text-field-padding;
+      max-width: 100%;
+      min-width: 0;
+      width: 100%;
+    }
+  }
+
+  .s-text-field__wrapper {
+    width: 100%;
+    color: inherit;
+    caret-color: currentColor;
+    display: flex;
     align-items: center;
+    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+    // transition: $primary-transition;
+
+    &::before,
+    &::after {
+      border-radius: inherit;
+      width: inherit;
+      bottom: -1px;
+      content: '';
+      left: 0;
+      position: absolute;
+      transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+      pointer-events: none;
+    }
+
+    &::before {
+      border-color: var(--theme-palette-primary-main);
+      border-style: solid;
+      border-width: thin 0 0 0;
+    }
+
+    &::after {
+      border-color: currentColor;
+      border-style: solid;
+      border-width: thin 0 thin 0;
+      transform: scaleX(0);
+    }
+
+    &:hover {
+      &::before {
+        border-color: var(--theme-palette-primary-main);
+      }
+    }
+
+    &:focus-within {
+      &::after {
+        transform: scale(1);
+      }
+
+      label {
+        color: inherit;
+      }
+    }
+
+    & > {
+      :global([slot='prepend']) {
+        margin-right: $text-field-prepend-append-margin;
+      }
+
+      :global([slot='append']) {
+        margin-right: $text-field-prepend-append-margin;
+      }
+    }
+
+    &.outlined {
+      &::before {
+        top: 0;
+        border-width: thin;
+      }
+
+      &:focus-within::before {
+        border-color: currentColor;
+        border-width: 2px;
+      }
+
+      label {
+        top: $text-field-outlined-label-top;
+
+        &.active {
+          padding: 0 4px;
+          background-color: var(--theme-palette-background-paper);
+          transform: $text-field-outlined-label-active-transform;
+        }
+      }
+    }
+
+    &.outlined,
+    &.solo,
+    &.filled {
+      padding: $text-field-wrapper-padding;
+    }
+
+    &.filled,
+    &.outlined {
+      min-height: $text-field-filled-outlined-min-height;
+    }
+
+    &.filled {
+      border-radius: $text-field-filled-border-radius;
+      background-color: var(--theme-text-fields-filled);
+
+      &:hover {
+        background-color: var(--theme-text-fields-filled-hover);
+      }
+
+      :global(input),
+      :global(textarea) {
+        padding-top: $text-field-filled-margin-top;
+      }
+
+      :global(label) {
+        top: $text-field-filled-label-top;
+
+        &.active {
+          transform: $text-field-filled-label-active-transform;
+        }
+      }
+    }
+
+    &.outlined,
+    &.solo,
+    &.rounded {
+      &::after {
+        display: none;
+      }
+    }
+
+    &.outlined,
+    &.solo {
+      border-radius: $text-field-border-radius;
+    }
+
+    &.solo {
+      min-height: $text-field-solo-min-height;
+      box-shadow: var(--theme-shadows-2);
+
+      &::before {
+        display: none;
+      }
+    }
+
+    &.rounded {
+      border-radius: $text-field-rounded-border-radius;
+
+      &.filled::before {
+        border: none;
+      }
+
+      &.outlined {
+        padding: $text-field-outlined-rounded-padding;
+      }
+    }
+
+    &.flat {
+      // @include elevation(0, true);
+      box-shadow: var(--theme-shadows-0);
+    }
   }
 
-  .fullWidth {
-    width: 100%;
+  .s-text-field {
+    &.error,
+    &.success {
+      :global(.s-text-field__wrapper::before) {
+        border-color: currentColor !important;
+      }
+    }
+
+    :global(&.dense) {
+      :global(input) {
+        padding: $text-field-dense-padding;
+      }
+
+      :global(.s-text-field__wrapper) {
+        :global(&.outlined),
+        :global(&.filled) {
+          min-height: $text-field-filled-outlined-dense-min-height;
+        }
+
+        &.outlined {
+          label {
+            top: $text-field-outlined-dense-label-top;
+
+            &.active {
+              transform: $text-field-outlined-dense-label-active-transform;
+            }
+          }
+        }
+
+        &.solo {
+          min-height: $text-field-solo-dense-min-height;
+        }
+
+        &.filled {
+          :global(input),
+          :global(textarea) {
+            margin-top: $text-field-filled-margin-top / 2;
+          }
+
+          label {
+            top: $text-field-filled-dense-label-top;
+
+            &.active {
+              transform: $text-field-filled-dense-label-active-transform;
+            }
+          }
+        }
+      }
+    }
   }
 
-  .disabled {
-    color: var(--theme-palette-text-disabled);
-    cursor: default;
-  }
-
-  .label {
-    position: absolute;
-    left: 0;
-    top: 0;
-    transform: translate(0, 24px) scale(1);
-  }
-
-  .label.shrink {
-    transform: translate(0, 1.5px) scale(0.75);
-    transform-origin: top left;
-  }
-
-  .input {
-    font: inherit;
-    letter-spacing: inherit;
-    color: currentColor;
-    padding: 4px 0 5px;
-    border: 0;
-    box-sizing: content-box;
-    background: none;
-    height: 1.4375em;
-    margin: 0;
-    display: block;
-    min-width: 0;
-    width: 100%;
-  }
-
-  .input:focus {
-    outline: 0;
-  }
-
-  .input.multiline {
-    height: auto;
-    resize: none;
-    padding: 0;
-  }
-
-  .underline:after {
-    border-bottom: 2px solid var(--theme-palette-primary-main);
-    left: 0;
-    bottom: 0;
-    content: '';
-    position: absolute;
-    right: 0;
-    transform: scaleX(0);
-    transition: transform 0.2s cubic-bezier(0.0, 0, 0.2, 1);
-    pointer-events: none;
-  }
-
-  .underline:before {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
-    left: 0;
-    bottom: 0;
-    content: '\00a0';
-    position: absolute;
-    right: 0;
-    transition: border-bottom-color 0.2s;
-    pointer-events: none;
-  }
-
-  .underline:hover:not(.disabled):before {
-    border-bottom: 2px solid var(--theme-palette-text-primary);
-  }
-
-  .focused.underline:after {
-    transform: scaleX(1);
-  }
 </style>

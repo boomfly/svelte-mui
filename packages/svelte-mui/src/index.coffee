@@ -1,3 +1,6 @@
+export {default as Checkbox} from './Checkbox'
+export {default as Radio} from './Radio'
+export {default as Select} from './Select'
 export {default as Typography} from './Typography'
 export {default as Paper} from './Paper'
 export {default as Grid} from './Grid'

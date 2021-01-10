@@ -16,6 +16,10 @@
     loader: -> import('./pages/list')
     resolve: -> './pages/list'
   }
+  SelectLoader = register {
+    loader: -> import('./pages/select')
+    resolve: -> './pages/select'
+  }
 </script>
 
 <script lang='coffee'>
@@ -142,6 +146,7 @@
         <a href='/components/button' use:link>Button Component</a>
         <a href='/components/text-field' use:link>TextField Component</a>
         <a href='/components/list' use:link>List Component</a>
+        <a href='/components/select' use:link>Select Component</a>
         <a href='/not-found' use:link>Not Found</a>
       </Grid>
     </Grid>
@@ -160,6 +165,9 @@
           </AnimatedRoute>
           <AnimatedRoute path='components/list'>
             <Loadable loader='{ListLoader}' />
+          </AnimatedRoute>
+          <AnimatedRoute path='components/select'>
+            <Loadable loader='{SelectLoader}' />
           </AnimatedRoute>
           <AnimatedRoute path='/'>
             Home Page

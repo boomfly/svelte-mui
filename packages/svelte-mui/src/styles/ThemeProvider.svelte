@@ -4,6 +4,8 @@
   import Colors from './Colors.svelte'
   import {currentTheme} from './store'
 
+  setContext 'MUI_Theme', currentTheme
+
   export theme = $currentTheme
 
   (`$:`) currentTheme.set(theme)
@@ -189,8 +191,8 @@
     /* background */
     /* --theme-palette-background-paper: var(--theme-colors-common-white);
     --theme-palette-background-default: var(--theme-colors-grey-50); */
-    --theme-palette-background-paper: var(--theme-colors-grey-50);
-    --theme-palette-background-default: var(--theme-colors-common-white);
+    --theme-palette-background-paper: var(--theme-colors-common-white);
+    --theme-palette-background-default: var(--theme-colors-grey-50);
 
     /* action */
     --theme-palette-action-active: rgba(0, 0, 0, 0.54);

@@ -1,16 +1,37 @@
-<script lang='coffee'>
-  import {fade} from 'svelte/transition'
-  export active = true
-  export opacity = 0.46
-  export color = 'rgb(33, 33, 33)'
-  export index = 5;
-  export absolute = false;
-  export fadeOptions = {}
-  export style = ''
+<script>
+  import { fade } from 'svelte/transition';
+  import BackgroundColor from '../internal/BackgroundColor';
+
+  let klass = '';
+  export let transition = fade;
+  export let inOpts = { duration: 250 };
+  export let outOpts = { duration: 250 };
+  export let active = true;
+  export let opacity = 0.46;
+  export let color = 'rgb(33, 33, 33)';
+  export let index = 5;
+  export let absolute = false;
+  export let style = '';
+  export { klass as class };
 </script>
 
-<style>
-  .overlay {
+{#if active}
+  <div
+    in:transition={inOpts}
+    out:transition={outOpts}
+    class="s-overlay {klass}"
+    class:absolute
+    on:click
+    style="z-index:{index};{style}">
+    <div class="s-overlay__scrim" use:BackgroundColor={color} style="opacity:{opacity}" />
+    <div class="s-overlay__content">
+      <slot />
+    </div>
+  </div>
+{/if}
+
+<style lang='scss'>
+  .s-overlay {
     align-items: center;
     border-radius: inherit;
     display: flex;
@@ -21,11 +42,13 @@
     right: 0;
     bottom: 0;
     pointer-events: auto;
+
+    &.absolute {
+      position: absolute;
+    }
   }
-  .overlay.absolute {
-    position: absolute;
-  }
-  .wrapper {
+
+  .s-overlay__scrim {
     border-radius: inherit;
     bottom: 0;
     height: 100%;
@@ -37,21 +60,8 @@
     width: 100%;
     will-change: opacity;
   }
-  .content {
-   position: relative; 
+
+  .s-overlay__content {
+    position: relative;
   }
 </style>
-
-{#if active}
-  <div
-    transition:fade={fadeOptions}
-    class='overlay {$$props.class || ''}'
-    class:absolute
-    on:click
-    style='z-index:{index};{style}'>
-    <div class='wrapper' style='opacity:{opacity};background-color:{color}' />
-    <div class='content'>
-      <slot />
-    </div>
-  </div>
-{/if}

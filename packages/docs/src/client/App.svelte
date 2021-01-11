@@ -20,6 +20,10 @@
     loader: -> import('./pages/select')
     resolve: -> './pages/select'
   }
+  DialogLoader = register {
+    loader: -> import('./pages/dialog')
+    resolve: -> './pages/dialog'
+  }
 </script>
 
 <script lang='coffee'>
@@ -112,7 +116,7 @@
     --theme-palette-background-level1: var(--theme-colors-grey-900);
     --theme-palette-background-level2: #333;
   }
-  .root :global(.button) {
+  .app-root :global(.button) {
     margin-left: calc(var(--theme-spacing) * 2) !important;
   }
   .main-content {
@@ -131,7 +135,7 @@
 
 <ThemeProvider {theme} />
 
-<div class='root'>
+<div class='app-root'>
   <AppBar class='p2' color='default' position='fixed' style='display: flex;'>
     <Typography variant='h5' style='flex-grow: 1'>Messages</Typography>
     <Button on:click={toggleTheme} variant='contained' disabled={false}>Toggle Theme</Button>
@@ -147,6 +151,7 @@
         <a href='/components/text-field' use:link>TextField Component</a>
         <a href='/components/list' use:link>List Component</a>
         <a href='/components/select' use:link>Select Component</a>
+        <a href='/components/dialog' use:link>Dialog Component</a>
         <a href='/not-found' use:link>Not Found</a>
       </Grid>
     </Grid>
@@ -168,6 +173,9 @@
           </AnimatedRoute>
           <AnimatedRoute path='components/select'>
             <Loadable loader='{SelectLoader}' />
+          </AnimatedRoute>
+          <AnimatedRoute path='components/dialog'>
+            <Loadable loader='{DialogLoader}' />
           </AnimatedRoute>
           <AnimatedRoute path='/'>
             Home Page

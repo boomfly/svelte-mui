@@ -241,6 +241,11 @@
     --theme-palette-action-activated-opacity: 0.24;
   }
 
+  :global(html), :global(body) {
+    height: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
   :global(html) {
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: grayscale;

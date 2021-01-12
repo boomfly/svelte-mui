@@ -37,11 +37,11 @@
     padding-top: 8px;
     position: static;
 
-    .s-subheader {
+    :global(.s-subheader) {
       padding-top: 0;
     }
 
-    .s-list-item.active {
+    :global(.s-list-item.active) {
       color: inherit;
     }
 
@@ -50,7 +50,7 @@
     }
 
     &.dense {
-      .s-subheader {
+      :global(.s-subheader) {
         font-size: 0.75rem;
         height: 40px;
         padding: 0 8px;
@@ -60,7 +60,7 @@
     &.rounded {
       padding: 8px;
 
-      .s-list-item {
+      :global(.s-list-item) {
         border-radius: 32px !important;
       }
     }
@@ -69,7 +69,7 @@
       padding-left: 8px;
       padding-right: 8px;
 
-      .s-list-item {
+      :global(.s-list-item) {
         padding: 0 16px;
         border-radius: 10px;
 
@@ -81,11 +81,11 @@
 
     &.nav,
     &.rounded {
-      .s-list-item:not(:last-child):not(:only-child) {
+      :global(.s-list-item:not(:last-child):not(:only-child)) {
         margin-bottom: 8px;
       }
 
-      .s-list-item.dense:not(:last-child):not(:only-child) {
+      :global(.s-list-item.dense:not(:last-child):not(:only-child)) {
         margin-bottom: 8px;
       }
     }
@@ -95,7 +95,7 @@
     }
 
     &.flat {
-      .s-list-item::before {
+      :global(.s-list-item::before) {
         display: none;
       }
     }

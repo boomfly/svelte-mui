@@ -180,7 +180,8 @@
       bottom: 0;
       width: 100%;
       height: 100%;
-      color: #ffffff;
+      // color: #ffffff;
+      color: var(--theme-palette-text-primary);
       padding: 1px;
 
       path {

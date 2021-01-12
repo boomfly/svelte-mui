@@ -28,8 +28,8 @@
 </ItemGroup>
 
 <style lang='scss'>
-  .s-list-item-group {
-    .s-list-item.active {
+  :global(.s-list-item-group) {
+    :global(.s-list-item.active) {
       color: inherit;
     }
   }

@@ -151,7 +151,7 @@
     max-height: 350px;
     overflow: auto;
     // @include elevation($menu-content-elevation);
-    box-shadow: var(--theme-shadow-8);
+    box-shadow: var(--theme-shadows-8);
 
     &:not(.tile) {
       border-radius: var(--theme-shape-border-radius);

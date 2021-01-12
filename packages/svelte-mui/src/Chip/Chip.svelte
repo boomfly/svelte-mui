@@ -1,11 +1,8 @@
 <script>
-  import {getContext} from 'svelte'
   import Ripple from '../actions/Ripple';
   import Icon from '../Icon';
   import closeIcon from '../internal/Icons/close';
   import { createEventDispatcher } from 'svelte';
-
-  let theme = getContext('MUI_Theme')
 
   // Classes to add to chip.
   let klass = '';
@@ -29,14 +26,6 @@
   function onClose(e) {
     active = false;
     dispatch('close', e);
-  }
-
-  $: {
-    if ($theme == 'light') {
-      style = '--chip-background-color: var(--theme-colors-grey-300);'
-    } else {
-      style = '--chip-background-color: var(--theme-colors-grey-700);'
-    }
   }
 </script>
 
@@ -63,8 +52,13 @@
 {/if}
 
 <style lang='scss'>
-  :root {
-    --chip-background-color: var(--theme-colors-grey-300);
+  :global([theme=light]) {
+    --chip-background-color: var(--theme-colors-grey-100);
+    --chip-color: var(--theme-colors-common-white);
+  }
+  :global([theme=dark]) {
+    --chip-background-color: var(--theme-colors-grey-900);
+    --chip-color: var(--theme-colors-common-white);
   }
 
   $chip-avatar-size: 24px !default;
@@ -160,7 +154,7 @@
 
   .s-chip {
     border-color: var(--theme-divider);
-    color: var(--theme-palette-text-primary);
+    color: var(--chip-color);
     align-items: center;
     cursor: default;
     display: inline-flex;
@@ -251,7 +245,7 @@
       user-select: none;
 
       &:active {
-        box-shadow: var(--theme-shadow-2);
+        box-shadow: var(--theme-shadows-2);
       }
     }
 

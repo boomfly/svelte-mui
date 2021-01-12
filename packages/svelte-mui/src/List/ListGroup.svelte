@@ -77,7 +77,7 @@
 
   .s-list-group__items {
     &.offset {
-      .s-list-item {
+      :global(.s-list-item) {
         padding-left: var(--s-list-group-offset) !important;
       }
     }

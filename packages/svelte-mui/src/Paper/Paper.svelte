@@ -13,7 +13,7 @@
 
 <style>
   .paper-root {
-    --shadow: var(--theme-shadow-0);
+    --shadow: var(--theme-shadows-0);
 
     background-color: var(--theme-palette-background-paper);
     color: var(--theme-palette-text-primary)

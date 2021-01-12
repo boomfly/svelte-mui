@@ -243,7 +243,6 @@
 
   :global(html), :global(body) {
     height: 100%;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
   :global(html) {
@@ -251,6 +250,7 @@
     -moz-font-smoothing: grayscale;
     box-sizing: border-box;
     -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
   :global(*, *::before, *::after) {
